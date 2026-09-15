@@ -78,12 +78,7 @@ body {
 }
 
 .title-slide {
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #ffffff 78%,
-    var(--purple-100) 78%
-  );
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 78%, var(--purple-100) 78%);
 }
 
 h1,
@@ -173,9 +168,7 @@ li {
 
 .two-col {
   display: grid;
-  grid-template-columns:
-    minmax(0, 1.35fr)
-    minmax(280px, 0.65fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
   gap: 2rem;
   align-items: start;
 }
@@ -436,16 +429,13 @@ a:focus-visible {
   border: 0;
 }
 
-
 /* =========================================================
-   ACTIVITY SLIDE
+   ACTIVITY SLIDE + VISUAL COUNTDOWN CLOCK
    ========================================================= */
 
 .activity-layout {
   display: grid;
-  grid-template-columns:
-    minmax(0, 1.55fr)
-    minmax(330px, 0.75fr);
+  grid-template-columns: minmax(0, 1.55fr) minmax(340px, 0.75fr);
   gap: 2.25rem;
   align-items: start;
 }
@@ -466,21 +456,16 @@ a:focus-visible {
   font-size: clamp(1.15rem, 1.45vw, 1.45rem);
 }
 
-
-/* =========================================================
-   VISUAL COUNTDOWN TIMER
-   ========================================================= */
-
 .activity-timer {
   background: var(--purple-100);
   border: 4px solid var(--purple-700);
   border-radius: 22px;
-  padding: 1.45rem 1.25rem 1.3rem;
+  padding: 1.35rem 1.25rem 1.25rem;
   text-align: center;
 }
 
 .timer-label {
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.65rem;
   max-width: none;
   color: var(--purple-700);
   font-size: clamp(1.05rem, 1.3vw, 1.25rem);
@@ -489,57 +474,56 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
+/* A Time-Timer-style filled clock:
+   the purple area itself disappears clockwise as time elapses. */
 
-/* Clock */
-
-.countdown-clock {
-  position: relative;
-  width: min(100%, 300px);
-  aspect-ratio: 1;
+.visual-clock {
+  width: min(100%, 310px);
   margin: 0 auto 1.1rem;
 }
 
-.countdown-ring {
-  display: block;
+.clock-face {
+  position: relative;
   width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  overflow: visible;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 8px solid var(--purple-900);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 4px #ffffff;
 }
 
-.countdown-ring-track,
-.countdown-ring-progress {
-  fill: none;
-  stroke-width: 16;
-}
-
-.countdown-ring-track {
-  stroke: #d7ccdf;
-}
-
-.countdown-ring-progress {
-  stroke: var(--purple-700);
-  stroke-linecap: round;
-  transition:
-    stroke-dashoffset 0.25s linear,
-    stroke 0.2s ease;
-}
-
-.countdown-clock-center {
+.clock-fill {
   position: absolute;
   inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--purple-700) 0deg 360deg,
+    #ffffff 360deg 360deg
+  );
+}
+
+.clock-center {
+  position: absolute;
+  inset: 24%;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
+  min-width: 0;
+  border: 4px solid var(--purple-900);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.88);
 }
 
 .timer-display {
   margin: 0;
   max-width: none;
   color: var(--purple-900);
-  font-size: clamp(3.25rem, 5vw, 4.8rem);
+  font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.045em;
@@ -547,17 +531,14 @@ a:focus-visible {
 }
 
 .timer-center-label {
-  margin: 0.55rem 0 0;
+  margin: 0.45rem 0 0;
   max-width: none;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-
-
-/* Timer controls */
 
 .timer-controls {
   display: flex;
@@ -599,37 +580,35 @@ a:focus-visible {
   font-weight: 700;
 }
 
-
-/* Final-minute warning */
-
 .activity-timer.timer-warning {
   border-color: #8a3b00;
 }
 
-.activity-timer.timer-warning .countdown-ring-progress {
-  stroke: #8a3b00;
+.activity-timer.timer-warning .clock-face {
+  border-color: #8a3b00;
+}
+
+.activity-timer.timer-warning .clock-center {
+  border-color: #8a3b00;
 }
 
 .activity-timer.timer-warning .timer-display {
   color: #8a3b00;
 }
 
-
-/* Time finished */
-
 .activity-timer.timer-finished {
   border-color: #8b0000;
 }
 
-.activity-timer.timer-finished .countdown-ring-progress {
-  stroke: #8b0000;
+.activity-timer.timer-finished .clock-face,
+.activity-timer.timer-finished .clock-center {
+  border-color: #8b0000;
 }
 
 .activity-timer.timer-finished .timer-display,
 .activity-timer.timer-finished .timer-center-label {
   color: #8b0000;
 }
-
 
 /* =========================================================
    RESPONSIVE
@@ -670,11 +649,10 @@ a:focus-visible {
     width: 100%;
   }
 
-  .countdown-clock {
-    width: min(100%, 280px);
+  .visual-clock {
+    width: min(100%, 290px);
   }
 }
-
 
 /* =========================================================
    REDUCED MOTION
@@ -684,12 +662,7 @@ a:focus-visible {
   html {
     scroll-behavior: auto;
   }
-
-  .countdown-ring-progress {
-    transition: none;
-  }
 }
-
 
 /* =========================================================
    PRINT
