@@ -345,8 +345,56 @@
     <section class="slide" id="slide-8" aria-labelledby="s8-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 8 of 11">8 / 11</p>
+        <p class="eyebrow">The library online</p>
+        <h2 id="s8-title">Start at uww.edu/library</h2>
+
+        <p class="lead">Three places to remember:</p>
+
+        <div class="card-grid three" role="list">
+          <article class="card" role="listitem">
+            <h3>Research@UWW</h3>
+            <p>
+              Search across books, articles, and other library materials.
+            </p>
+          </article>
+
+          <article class="card" role="listitem">
+            <h3>Articles / Databases</h3>
+            <p>
+              Go directly to subject databases and research tools.
+            </p>
+          </article>
+
+          <article class="card" role="listitem">
+            <h3>Get Help</h3>
+            <p>
+              Find ways to contact a librarian when you need support.
+            </p>
+          </article>
+        </div>
+
+        <p class="web-link">
+          <a href="https://www.uww.edu/library">uww.edu/library</a>
+        </p>
+
+        <nav class="slide-nav" aria-label="Slide navigation">
+          <a href="#slide-7">
+            <span aria-hidden="true">←</span> Previous
+          </a>
+          <a class="next" href="#slide-9">
+            Next <span aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+
+    <!-- SLIDE 9 -->
+    <section class="slide" id="slide-9" aria-labelledby="s9-title">
+      <div class="slide-inner">
+        <p class="slide-number" aria-label="Slide 9 of 11">9 / 11</p>
         <p class="eyebrow">Finding books</p>
-        <h2 id="s8-title">Call numbers are a book’s address</h2>
+        <h2 id="s9-title">Call numbers are a book’s address</h2>
 
         <div class="two-col">
           <div>
@@ -410,54 +458,6 @@
             and make these systems more accurate and inclusive.
           </p>
         </div>
-
-        <nav class="slide-nav" aria-label="Slide navigation">
-          <a href="#slide-7">
-            <span aria-hidden="true">←</span> Previous
-          </a>
-          <a class="next" href="#slide-9">
-            Next <span aria-hidden="true">→</span>
-          </a>
-        </nav>
-      </div>
-    </section>
-
-
-    <!-- SLIDE 9 -->
-    <section class="slide" id="slide-9" aria-labelledby="s9-title">
-      <div class="slide-inner">
-        <p class="slide-number" aria-label="Slide 9 of 11">9 / 11</p>
-        <p class="eyebrow">The library online</p>
-        <h2 id="s9-title">Start at uww.edu/library</h2>
-
-        <p class="lead">Three places to remember:</p>
-
-        <div class="card-grid three" role="list">
-          <article class="card" role="listitem">
-            <h3>Research@UWW</h3>
-            <p>
-              Search across books, articles, and other library materials.
-            </p>
-          </article>
-
-          <article class="card" role="listitem">
-            <h3>Articles / Databases</h3>
-            <p>
-              Go directly to subject databases and research tools.
-            </p>
-          </article>
-
-          <article class="card" role="listitem">
-            <h3>Get Help</h3>
-            <p>
-              Find ways to contact a librarian when you need support.
-            </p>
-          </article>
-        </div>
-
-        <p class="web-link">
-          <a href="https://www.uww.edu/library">uww.edu/library</a>
-        </p>
 
         <nav class="slide-nav" aria-label="Slide navigation">
           <a href="#slide-8">
@@ -558,16 +558,50 @@
 
           <aside
             class="activity-timer"
-            aria-label="15 minute activity timer"
+            aria-label="15 minute activity countdown"
           >
             <p class="timer-label">Time remaining</p>
 
-            <p
-              class="timer-display"
-              id="activity-timer"
-              role="timer"
-              aria-live="off"
-            >15:00</p>
+            <div class="countdown-clock">
+
+              <svg
+                class="countdown-ring"
+                viewBox="0 0 240 240"
+                aria-hidden="true"
+              >
+                <circle
+                  class="countdown-ring-track"
+                  cx="120"
+                  cy="120"
+                  r="104"
+                ></circle>
+
+                <circle
+                  class="countdown-ring-progress"
+                  id="countdown-ring-progress"
+                  cx="120"
+                  cy="120"
+                  r="104"
+                ></circle>
+              </svg>
+
+              <div class="countdown-clock-center">
+                <p
+                  class="timer-display"
+                  id="activity-timer"
+                  role="timer"
+                  aria-live="off"
+                  aria-label="15 minutes remaining"
+                >
+                  15:00
+                </p>
+
+                <p class="timer-center-label" id="timer-center-label">
+                  remaining
+                </p>
+              </div>
+
+            </div>
 
             <div class="timer-controls">
               <button type="button" id="timer-start">Start</button>
@@ -601,20 +635,28 @@
   </main>
 
 
-  <!-- 15-MINUTE ACTIVITY TIMER -->
+  <!-- 15-MINUTE VISUAL ACTIVITY COUNTDOWN -->
   <script>
     (() => {
       const TIMER_LENGTH = 15 * 60;
+      const RADIUS = 104;
+      const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
       let timeRemaining = TIMER_LENGTH;
       let timerInterval = null;
+      let endTime = null;
 
       const display = document.getElementById("activity-timer");
       const timerCard = document.querySelector(".activity-timer");
+      const progressRing = document.getElementById("countdown-ring-progress");
+      const centerLabel = document.getElementById("timer-center-label");
       const startButton = document.getElementById("timer-start");
       const pauseButton = document.getElementById("timer-pause");
       const resetButton = document.getElementById("timer-reset");
       const status = document.getElementById("timer-status");
+
+      progressRing.style.strokeDasharray = CIRCUMFERENCE;
+      progressRing.style.strokeDashoffset = 0;
 
       function updateDisplay() {
         const minutes = Math.floor(timeRemaining / 60);
@@ -623,10 +665,44 @@
         display.textContent =
           `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
-        display.classList.toggle(
-          "timer-warning",
-          timeRemaining <= 60 && timeRemaining > 0
+        display.setAttribute(
+          "aria-label",
+          `${minutes} minutes ${seconds} seconds remaining`
         );
+
+        const fractionRemaining = timeRemaining / TIMER_LENGTH;
+        const offset = CIRCUMFERENCE * (1 - fractionRemaining);
+
+        progressRing.style.strokeDashoffset = offset;
+
+        const warning =
+          timeRemaining <= 60 &&
+          timeRemaining > 0;
+
+        timerCard.classList.toggle("timer-warning", warning);
+
+        if (timeRemaining === 0) {
+          finishTimer();
+        }
+      }
+
+      function tick() {
+        if (!endTime) return;
+
+        const millisecondsRemaining = endTime - Date.now();
+
+        timeRemaining = Math.max(
+          0,
+          Math.ceil(millisecondsRemaining / 1000)
+        );
+
+        updateDisplay();
+
+        if (timeRemaining === 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          endTime = null;
+        }
       }
 
       function startTimer() {
@@ -634,25 +710,16 @@
           return;
         }
 
+        endTime = Date.now() + (timeRemaining * 1000);
+
+        timerCard.classList.add("timer-running");
+        timerCard.classList.remove("timer-finished");
+
         status.textContent = "Timer running.";
 
-        timerInterval = setInterval(() => {
-          timeRemaining -= 1;
+        tick();
 
-          if (timeRemaining <= 0) {
-            timeRemaining = 0;
-            clearInterval(timerInterval);
-            timerInterval = null;
-
-            display.classList.remove("timer-warning");
-            display.classList.add("timer-finished");
-            timerCard.classList.add("timer-finished");
-
-            status.textContent = "Time’s up!";
-          }
-
-          updateDisplay();
-        }, 1000);
+        timerInterval = setInterval(tick, 250);
       }
 
       function pauseTimer() {
@@ -660,26 +727,58 @@
           return;
         }
 
+        tick();
+
         clearInterval(timerInterval);
         timerInterval = null;
+        endTime = null;
+
+        timerCard.classList.remove("timer-running");
         status.textContent = "Timer paused.";
+      }
+
+      function finishTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        endTime = null;
+
+        timeRemaining = 0;
+
+        timerCard.classList.remove(
+          "timer-running",
+          "timer-warning"
+        );
+
+        timerCard.classList.add("timer-finished");
+
+        display.textContent = "00:00";
+        display.setAttribute("aria-label", "Time is up");
+
+        progressRing.style.strokeDashoffset = CIRCUMFERENCE;
+
+        centerLabel.textContent = "TIME’S UP!";
+        status.textContent = "Time’s up!";
       }
 
       function resetTimer() {
         clearInterval(timerInterval);
         timerInterval = null;
+        endTime = null;
 
         timeRemaining = TIMER_LENGTH;
 
-        display.classList.remove(
+        timerCard.classList.remove(
+          "timer-running",
           "timer-warning",
           "timer-finished"
         );
 
-        timerCard.classList.remove("timer-finished");
+        centerLabel.textContent = "remaining";
+        status.textContent = "Ready when you are.";
+
+        progressRing.style.strokeDashoffset = 0;
 
         updateDisplay();
-        status.textContent = "Ready when you are.";
       }
 
       startButton.addEventListener("click", startTimer);
