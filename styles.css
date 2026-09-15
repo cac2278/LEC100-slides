@@ -1,20 +1,25 @@
-/* Accessible slide deck
-   Designed for WCAG 2.2 AA contrast, large projected text, keyboard navigation,
-   reduced-motion preferences, semantic HTML, and an accessible visual timer. */
+/* =========================================================
+   LEC 100 — LIBRARY INTRODUCTION
+   ========================================================= */
 
 :root {
   --purple-900: #2f1747;
   --purple-800: #3b1d59;
   --purple-700: #4c286d;
   --purple-100: #efe8f5;
+
   --ink: #171717;
   --muted: #4a4a4a;
+
   --paper: #ffffff;
   --soft: #f5f3f7;
   --border: #d8d2df;
+
   --focus: #0a5bd8;
+
   --max-width: 1180px;
 }
+
 
 *,
 *::before,
@@ -22,680 +27,1492 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  background: var(--purple-900);
+
+html,
+body {
+  width: 100%;
   height: 100%;
+  margin: 0;
   overflow: hidden;
 }
+
 
 body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, Helvetica, system-ui, sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    system-ui,
+    sans-serif;
+
   color: var(--ink);
   background: var(--purple-900);
-  line-height: 1.45;
+
+  line-height: 1.4;
 }
 
-.skip-link {
-  position: fixed;
-  z-index: 1000;
-  top: 0.75rem;
-  left: 0.75rem;
-  transform: translateY(-180%);
-  padding: 0.8rem 1rem;
-  background: #ffffff;
-  color: #000000;
-  border: 3px solid #000000;
-  font-size: 1rem;
-  font-weight: 700;
-}
 
-.skip-link:focus {
-  transform: translateY(0);
-}
+/* =========================================================
+   DECK
+
+   ONE SLIDE ONLY.
+   NO VERTICAL SCROLLING.
+   ========================================================= */
 
 .deck {
+  position: relative;
+
+  width: 100vw;
   height: 100vh;
+
   overflow: hidden;
 }
 
+
 .slide {
-  height: 100vh;
-  min-height: 100vh;
-  display: flex;
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
   align-items: center;
   justify-content: center;
+
+  overflow: hidden;
+
   background: var(--paper);
-  border-top: 14px solid var(--purple-800);
-  border-bottom: 18px solid var(--purple-800);
+
+  border-top:
+    12px solid
+    var(--purple-800);
+
+  border-bottom:
+    16px solid
+    var(--purple-800);
 }
+
+
+.slide.active {
+  display: flex;
+}
+
 
 .slide-inner {
-  width: min(92vw, var(--max-width));
-  margin: 0 auto;
-  padding: clamp(2rem, 4vh, 3rem) 1rem clamp(1.5rem, 3vh, 2.25rem);
   position: relative;
+
+  width:
+    min(
+      92vw,
+      var(--max-width)
+    );
+
+  max-height:
+    calc(
+      100vh - 28px
+    );
+
+  margin: 0 auto;
+
+  padding:
+    2rem
+    1rem
+    1.25rem;
 }
+
 
 .title-slide {
-  background: linear-gradient(180deg, #ffffff 0%, #ffffff 78%, var(--purple-100) 78%);
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 78%,
+      var(--purple-100) 78%
+    );
 }
 
-h1,
-h2,
-h3,
-p,
-li,
-blockquote {
-  max-width: 72ch;
-}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
 
 h1,
 h2,
 h3 {
-  line-height: 1.1;
   margin-top: 0;
+
   color: var(--purple-900);
+
+  line-height: 1.08;
 }
+
 
 h1 {
-  font-size: clamp(3.2rem, 6vw, 5.8rem);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
+
+  font-size:
+    clamp(
+      3rem,
+      5.5vw,
+      5.4rem
+    );
 }
+
 
 h2 {
-  font-size: clamp(2.6rem, 4.4vw, 4.4rem);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1rem;
+
+  font-size:
+    clamp(
+      2.4rem,
+      4vw,
+      4rem
+    );
 }
 
+
 h3 {
-  font-size: clamp(1.75rem, 2.3vw, 2.35rem);
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.4rem;
+
+  font-size:
+    clamp(
+      1.5rem,
+      2vw,
+      2rem
+    );
 }
+
 
 p,
 li,
 blockquote {
-  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-size:
+    clamp(
+      1.15rem,
+      1.65vw,
+      1.65rem
+    );
 }
+
+
+p {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
 
 .subtitle,
 .lead {
-  font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+  font-size:
+    clamp(
+      1.4rem,
+      2.1vw,
+      2rem
+    );
 }
+
 
 .subtitle {
-  max-width: 42ch;
+  max-width: 44ch;
+
   color: var(--muted);
-  margin-bottom: 2rem;
 }
 
+
 .eyebrow {
-  margin: 0 0 0.6rem;
+  margin:
+    0
+    0
+    0.4rem;
+
   color: var(--purple-700);
-  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+
+  font-size:
+    clamp(
+      0.9rem,
+      1.2vw,
+      1.15rem
+    );
+
   font-weight: 800;
+
   letter-spacing: 0.08em;
+
   text-transform: uppercase;
 }
 
-.presenter {
-  margin-top: 2.25rem;
-  padding-left: 1.1rem;
-  border-left: 8px solid var(--purple-700);
+
+/* =========================================================
+   SLIDE NUMBER
+   ========================================================= */
+
+.slide-number {
+  position: absolute;
+
+  top: 0;
+  right: 1rem;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
 }
 
-.presenter p {
-  margin: 0.2rem 0;
+
+/* =========================================================
+   PRESENTER
+   ========================================================= */
+
+.presenter {
+  max-width: 780px;
+
+  margin-top: 1.5rem;
+
+  padding-left: 1rem;
+
+  border-left:
+    7px solid
+    var(--purple-700);
 }
+
+
+.presenter p {
+  margin: 0.18rem 0;
+
+  font-size:
+    clamp(
+      1rem,
+      1.35vw,
+      1.35rem
+    );
+}
+
+
+.pronouns {
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   LISTS
+   ========================================================= */
 
 ul,
 ol {
   padding-left: 1.4em;
 }
 
+
 li {
-  margin: 0.45em 0;
+  margin: 0.35em 0;
 }
+
 
 .big-list {
   max-width: 900px;
 }
 
+
 .big-list li {
-  margin: 0.6em 0;
+  margin: 0.5em 0;
 }
+
+
+/* =========================================================
+   TWO COLUMN
+   ========================================================= */
 
 .two-col {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-  gap: 2rem;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(280px, 0.65fr);
+
+  gap: 1.5rem;
+
   align-items: start;
 }
 
+
+/* =========================================================
+   CALLOUT
+   ========================================================= */
+
 .callout {
+  padding: 1.15rem;
+
   background: var(--purple-100);
-  border: 3px solid var(--purple-700);
-  border-radius: 18px;
-  padding: 1.6rem;
+
+  border:
+    3px solid
+    var(--purple-700);
+
+  border-radius: 16px;
 }
 
-.callout.compact {
-  margin-top: 2rem;
-  max-width: 950px;
-}
 
-.location {
-  font-weight: 700;
-  margin-top: 1.2rem;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
-}
-
-.card-grid.three {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.card,
-.floor-card {
-  border: 3px solid var(--border);
-  border-radius: 18px;
-  padding: 1.45rem;
-  background: var(--soft);
-}
-
-.card p,
-.floor-card p,
-.floor-card li {
-  font-size: clamp(1.25rem, 1.65vw, 1.65rem);
-}
-
-.service-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem 2rem;
-}
-
-.service-list > div {
-  border-left: 8px solid var(--purple-700);
-  padding: 0.4rem 0 0.6rem 1rem;
-}
-
-.service-list p {
+.callout p:first-child {
   margin-top: 0;
 }
 
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+
+.callout.compact {
+  margin-top: 1rem;
+}
+
+
+.contact-block {
+  margin-top: 0.9rem;
+
+  font-weight: 700;
+}
+
+
+.contact-block p {
+  font-size:
+    clamp(
+      0.95rem,
+      1.2vw,
+      1.2rem
+    );
+}
+
+
+/* =========================================================
+   QUOTES
+   ========================================================= */
+
 .quote-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 0.8rem;
 }
+
 
 blockquote {
   margin: 0;
-  padding: 1.15rem 1.3rem;
-  border: 3px solid var(--border);
-  border-radius: 16px;
+
+  padding:
+    0.85rem
+    1rem;
+
   background: var(--soft);
+
+  border:
+    3px solid
+    var(--border);
+
+  border-radius: 14px;
+
   font-weight: 700;
 }
 
-.pathway {
-  margin-top: 2rem;
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.service-list {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 1rem;
-  align-items: center;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    0.75rem
+    1.75rem;
 }
 
-.path-box {
-  border: 4px solid var(--purple-700);
-  border-radius: 18px;
-  padding: 1.6rem;
-  background: #ffffff;
+
+.service-list > div {
+  padding:
+    0.25rem
+    0
+    0.4rem
+    0.9rem;
+
+  border-left:
+    7px solid
+    var(--purple-700);
 }
 
-.arrow {
-  font-size: 3rem;
-  font-weight: 900;
-  color: var(--purple-700);
+
+.service-list p {
+  margin: 0;
+
+  font-size:
+    clamp(
+      1rem,
+      1.45vw,
+      1.45rem
+    );
 }
+
+
+/* =========================================================
+   FLOORS
+   ========================================================= */
 
 .floor-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.4rem;
-}
 
-.floor-label {
-  font-weight: 800;
-  color: var(--purple-700);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 1.05rem;
-}
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
 
-.note {
-  margin-top: 1.5rem;
-  padding: 1rem 1.2rem;
-  border-left: 8px solid var(--purple-700);
-  background: var(--purple-100);
-}
-
-.web-link {
-  margin-top: 1.8rem;
-  font-weight: 800;
-}
-
-a {
-  color: #174ea6;
-  text-decoration-thickness: 0.13em;
-  text-underline-offset: 0.15em;
-}
-
-a:hover {
-  text-decoration-thickness: 0.18em;
-}
-
-a:focus-visible {
-  outline: 4px solid var(--focus);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.takeaways {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0 0;
-  counter-reset: takeaway;
-}
-
-.takeaways li {
-  counter-increment: takeaway;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.5rem 1rem;
-  margin: 1.2rem 0;
-  padding: 1.1rem 1.3rem;
-  border-left: 10px solid var(--purple-700);
-  background: var(--soft);
-}
-
-.takeaways li::before {
-  content: counter(takeaway);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.2em;
-  height: 2.2em;
-  border-radius: 50%;
-  background: var(--purple-800);
-  color: white;
-  font-weight: 800;
-}
-
-.takeaways li span {
-  grid-column: 2;
-  color: var(--muted);
-  font-size: 0.92em;
-}
-
-.slide-nav {
-  margin-top: 2.25rem;
-  padding-top: 1rem;
-  border-top: 2px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 1rem;
 }
 
-.slide-nav a {
-  display: inline-block;
-  min-height: 44px;
-  padding: 0.65rem 0.85rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+
+.floor-card {
+  padding: 1rem;
+
+  background: var(--soft);
+
+  border:
+    3px solid
+    var(--border);
+
+  border-radius: 16px;
 }
 
-.slide-nav .next {
-  margin-left: auto;
+
+.floor-card li {
+  font-size:
+    clamp(
+      1rem,
+      1.4vw,
+      1.4rem
+    );
 }
 
-.slide-number {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #4a4a4a;
-}
 
-.contact-info {
-  max-width: 760px;
-}
+.floor-label {
+  margin-top: 0;
 
-.contact-info p {
-  font-size: clamp(1.15rem, 1.55vw, 1.55rem);
-  margin: 0.28rem 0;
-}
+  color: var(--purple-700);
 
-.pronouns {
-  font-weight: 400;
-}
+  font-size: 0.95rem;
 
-.contact-block p {
-  margin: 0.35rem 0;
-  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
-}
+  font-weight: 800;
 
-.call-number {
-  font-family: Arial, Helvetica, system-ui, sans-serif;
-  font-size: clamp(2rem, 3.3vw, 3.2rem);
-  line-height: 1.25;
   letter-spacing: 0.04em;
-  color: var(--purple-900);
+
+  text-transform: uppercase;
 }
 
-.lcc-resource {
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.note {
+  margin-top: 0.9rem;
+
+  padding:
+    0.7rem
+    1rem;
+
+  background: var(--purple-100);
+
+  border-left:
+    7px solid
+    var(--purple-700);
+
+  font-size:
+    clamp(
+      1rem,
+      1.35vw,
+      1.35rem
+    );
+}
+
+
+/* =========================================================
+   LIBRARY SYSTEM PATH
+   ========================================================= */
+
+.pathway {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  gap: 1rem;
+
+  align-items: center;
+
   margin-top: 1.25rem;
 }
 
-.lcc-resource p {
-  font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+
+.path-box {
+  padding: 1.2rem;
+
+  background: #ffffff;
+
+  border:
+    4px solid
+    var(--purple-700);
+
+  border-radius: 16px;
 }
 
-.language-note {
-  padding: 0.9rem 1rem;
-  border-left: 6px solid var(--purple-700);
-  background: var(--soft);
-  color: var(--ink);
+
+.path-box p {
+  margin-bottom: 0;
+
+  font-size:
+    clamp(
+      1rem,
+      1.4vw,
+      1.4rem
+    );
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+
+.arrow {
+  color: var(--purple-700);
+
+  font-size: 2.6rem;
+
+  font-weight: 900;
 }
+
 
 /* =========================================================
-   ACTIVITY SLIDE + VISUAL COUNTDOWN CLOCK
+   WEBSITE CARDS
+   ========================================================= */
+
+.card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 1rem;
+}
+
+
+.card {
+  padding: 1rem;
+
+  background: var(--soft);
+
+  border:
+    3px solid
+    var(--border);
+
+  border-radius: 16px;
+}
+
+
+.card p {
+  font-size:
+    clamp(
+      1rem,
+      1.35vw,
+      1.35rem
+    );
+}
+
+
+.web-link {
+  margin-top: 1rem;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CALL NUMBER
+   ========================================================= */
+
+.call-number {
+  color: var(--purple-900);
+
+  font-size:
+    clamp(
+      1.8rem,
+      2.8vw,
+      2.8rem
+    );
+
+  line-height: 1.2;
+
+  letter-spacing: 0.04em;
+}
+
+
+.lcc-resource {
+  margin-top: 0.6rem;
+}
+
+
+.lcc-resource p {
+  margin:
+    0.35rem
+    0;
+
+  font-size:
+    clamp(
+      0.9rem,
+      1.15vw,
+      1.15rem
+    );
+}
+
+
+.language-note {
+  padding:
+    0.55rem
+    0.8rem;
+
+  background: var(--soft);
+
+  border-left:
+    5px solid
+    var(--purple-700);
+}
+
+
+/* =========================================================
+   TAKEAWAYS
+   ========================================================= */
+
+.takeaways {
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0.5rem 0 0;
+
+  counter-reset: takeaway;
+}
+
+
+.takeaways li {
+  counter-increment: takeaway;
+
+  position: relative;
+
+  margin: 0.75rem 0;
+
+  padding:
+    0.75rem
+    1rem
+    0.75rem
+    4.2rem;
+
+  background: var(--soft);
+
+  border-left:
+    8px solid
+    var(--purple-700);
+}
+
+
+.takeaways li::before {
+  content:
+    counter(takeaway);
+
+  position: absolute;
+
+  left: 1rem;
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 2.2rem;
+  height: 2.2rem;
+
+  color: #ffffff;
+
+  background: var(--purple-800);
+
+  border-radius: 50%;
+
+  font-weight: 800;
+}
+
+
+.takeaways strong {
+  display: block;
+}
+
+
+.takeaways span {
+  display: block;
+
+  margin-top: 0.15rem;
+
+  color: var(--muted);
+
+  font-size: 0.88em;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: #174ea6;
+
+  text-decoration-thickness: 0.12em;
+
+  text-underline-offset: 0.15em;
+}
+
+
+a:focus-visible,
+button:focus-visible {
+  outline:
+    4px solid
+    var(--focus);
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.slide-nav {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-top: 1rem;
+
+  padding-top: 0.65rem;
+
+  border-top:
+    2px solid
+    var(--border);
+}
+
+
+.nav-button {
+  min-height: 42px;
+
+  padding:
+    0.55rem
+    0.8rem;
+
+  color: #174ea6;
+
+  background: transparent;
+
+  border: 0;
+
+  font:
+    inherit;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  text-decoration: underline;
+
+  text-decoration-thickness: 0.12em;
+
+  text-underline-offset: 0.15em;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   ACTIVITY SLIDE
    ========================================================= */
 
 .activity-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(340px, 0.75fr);
-  gap: 2.25rem;
+
+  grid-template-columns:
+    minmax(0, 1.45fr)
+    minmax(300px, 0.7fr);
+
+  gap: 1.25rem;
+
   align-items: start;
 }
 
-.activity-slide .big-list {
+
+.activity-list {
   margin-top: 0;
 }
 
-.activity-slide .big-list li {
-  font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+
+.activity-list li {
+  font-size:
+    clamp(
+      1rem,
+      1.35vw,
+      1.35rem
+    );
 }
 
-.activity-slide .callout.compact {
-  margin-top: 1.4rem;
+
+.activity-slide .callout p {
+  font-size:
+    clamp(
+      0.95rem,
+      1.2vw,
+      1.2rem
+    );
 }
 
-.activity-slide .callout.compact p {
-  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
-}
 
-
-/* Clean visual timer card: no black ring, no donut. */
+/* =========================================================
+   TIMER
+   ========================================================= */
 
 .activity-timer {
-  background: #ffffff;
-  border: 3px solid var(--purple-100);
-  border-radius: 22px;
-  padding: 1.35rem 1.25rem 1.25rem;
+  padding:
+    0.85rem
+    1rem;
+
   text-align: center;
+
+  background: #ffffff;
+
+  border:
+    3px solid
+    var(--purple-100);
+
+  border-radius: 20px;
 }
 
+
 .timer-label {
-  margin: 0 0 0.8rem;
   max-width: none;
+
+  margin:
+    0
+    0
+    0.5rem;
+
   color: var(--purple-700);
-  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+
+  font-size: 0.95rem;
+
   font-weight: 800;
+
   letter-spacing: 0.06em;
+
   text-transform: uppercase;
 }
 
 
-/* The whole circle is the visual countdown.
-   Purple = time remaining.
-   Pale lavender = time elapsed. */
+/*
+   The SVG itself is the clock.
+
+   Purple base circle is defined INLINE in HTML.
+   Lavender elapsed wedge is defined INLINE in HTML.
+
+   Therefore neither can accidentally become black
+   because of a missing CSS fill rule.
+*/
 
 .visual-clock {
-  width: min(100%, 300px);
-  margin: 0 auto 1.15rem;
-}
-
-.clock-face {
   position: relative;
-  width: 100%;
+
+  width:
+    min(
+      100%,
+      250px
+    );
+
   aspect-ratio: 1;
-  overflow: hidden;
-  border: 0;
-  border-radius: 50%;
-  background: var(--purple-100);
-  box-shadow: 0 4px 18px rgba(47, 23, 71, 0.12);
-}
 
-.clock-fill {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--purple-700);
+  margin:
+    0
+    auto
+    0.65rem;
 }
 
 
-/* The time floats directly on the circle.
-   There is deliberately no inner disk or ring. */
+.timer-svg {
+  display: block;
 
-.clock-center {
+  width: 100%;
+  height: 100%;
+}
+
+
+.timer-text {
   position: absolute;
+
   inset: 0;
-  z-index: 2;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
+
   pointer-events: none;
 }
 
+
 .timer-display {
-  margin: 0;
   max-width: none;
+
+  margin: 0;
+
   color: #ffffff;
-  font-size: clamp(3.15rem, 5vw, 4.75rem);
+
+  font-size:
+    clamp(
+      2.8rem,
+      4vw,
+      4rem
+    );
+
   font-weight: 800;
+
   line-height: 1;
-  letter-spacing: -0.045em;
-  font-variant-numeric: tabular-nums;
-  text-shadow: 0 2px 8px rgba(47, 23, 71, 0.5);
+
+  letter-spacing: -0.04em;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  text-shadow:
+    0
+    2px
+    7px
+    rgba(47, 23, 71, 0.75);
 }
+
 
 .timer-center-label {
-  margin: 0.55rem 0 0;
   max-width: none;
+
+  margin:
+    0.4rem
+    0
+    0;
+
   color: #ffffff;
-  font-size: 0.92rem;
+
+  font-size: 0.8rem;
+
   font-weight: 800;
+
   letter-spacing: 0.05em;
+
   text-transform: uppercase;
-  text-shadow: 0 1px 5px rgba(47, 23, 71, 0.55);
+
+  text-shadow:
+    0
+    1px
+    5px
+    rgba(47, 23, 71, 0.75);
 }
 
 
-/* Timer controls */
+/* =========================================================
+   TIMER CONTROLS
+   ========================================================= */
 
 .timer-controls {
   display: flex;
+
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.65rem;
+
+  gap: 0.45rem;
 }
 
+
 .timer-controls button {
-  min-width: 88px;
-  min-height: 48px;
-  padding: 0.7rem 0.9rem;
-  border: 3px solid var(--purple-800);
-  border-radius: 10px;
-  background: #ffffff;
+  min-width: 72px;
+  min-height: 40px;
+
+  padding:
+    0.45rem
+    0.6rem;
+
   color: var(--purple-900);
-  font: inherit;
-  font-size: 1.05rem;
+
+  background: #ffffff;
+
+  border:
+    2px solid
+    var(--purple-800);
+
+  border-radius: 8px;
+
+  font:
+    inherit;
+
+  font-size: 0.9rem;
+
   font-weight: 800;
+
   cursor: pointer;
 }
 
+
 .timer-controls button:hover {
-  background: var(--purple-800);
   color: #ffffff;
+
+  background:
+    var(--purple-800);
 }
 
-.timer-controls button:focus-visible {
-  outline: 4px solid var(--focus);
-  outline-offset: 4px;
-}
 
 .timer-status {
-  margin: 0.8rem 0 0;
   max-width: none;
-  min-height: 1.5em;
+
+  min-height: 1.2em;
+
+  margin:
+    0.45rem
+    0
+    0;
+
   color: var(--muted);
-  font-size: 1rem;
+
+  font-size: 0.8rem;
+
   font-weight: 700;
 }
 
 
-/* Final minute: warm border around the card, while preserving
-   the visual purple/lavender countdown itself. */
+/* LAST MINUTE */
 
 .activity-timer.timer-warning {
   border-color: #8a3b00;
 }
 
-.activity-timer.timer-warning .timer-label,
-.activity-timer.timer-warning .timer-status {
-  color: #8a3b00;
-}
 
-
-/* Finished state */
+/* TIME'S UP */
 
 .activity-timer.timer-finished {
   border-color: #8b0000;
 }
 
-.activity-timer.timer-finished .clock-face {
-  background: var(--purple-100);
-}
 
 .activity-timer.timer-finished .timer-display,
 .activity-timer.timer-finished .timer-center-label {
   color: #8b0000;
+
   text-shadow: none;
 }
 
-.activity-timer.timer-finished .timer-label,
-.activity-timer.timer-finished .timer-status {
-  color: #8b0000;
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.sr-only {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip:
+    rect(
+      0,
+      0,
+      0,
+      0
+    );
+
+  white-space: nowrap;
+
+  border: 0;
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   SHORT LAPTOP / PROJECTOR SCREEN
+
+   This is what keeps the deck from requiring scrolling.
    ========================================================= */
 
-@media (max-width: 900px) {
-  .two-col,
-  .card-grid,
-  .card-grid.three,
-  .service-list,
-  .quote-grid,
-  .floor-grid,
-  .pathway,
-  .activity-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .arrow {
-    transform: rotate(90deg);
-    text-align: center;
-  }
-
+@media (max-height: 800px) {
 
   .slide-inner {
-    padding-top: 3rem;
-    padding-bottom: 2rem;
+    padding:
+      1rem
+      1rem
+      0.6rem;
   }
+
+
+  h1 {
+    font-size:
+      clamp(
+        2.6rem,
+        5vw,
+        4.4rem
+      );
+  }
+
+
+  h2 {
+    margin-bottom: 0.6rem;
+
+    font-size:
+      clamp(
+        2rem,
+        3.5vw,
+        3.2rem
+      );
+  }
+
+
+  h3 {
+    font-size:
+      clamp(
+        1.25rem,
+        1.8vw,
+        1.7rem
+      );
+  }
+
+
+  p,
+  li,
+  blockquote {
+    font-size:
+      clamp(
+        0.95rem,
+        1.35vw,
+        1.3rem
+      );
+  }
+
+
+  .lead,
+  .subtitle {
+    font-size:
+      clamp(
+        1.15rem,
+        1.7vw,
+        1.55rem
+      );
+  }
+
+
+  .presenter {
+    margin-top: 0.8rem;
+  }
+
+
+  .presenter p {
+    font-size:
+      clamp(
+        0.9rem,
+        1.15vw,
+        1.1rem
+      );
+  }
+
+
+  .big-list li {
+    margin: 0.3em 0;
+  }
+
+
+  .callout,
+  .card,
+  .floor-card,
+  .path-box {
+    padding: 0.7rem;
+  }
+
+
+  .quote-grid {
+    gap: 0.45rem;
+  }
+
+
+  blockquote {
+    padding:
+      0.55rem
+      0.75rem;
+  }
+
+
+  .service-list {
+    gap:
+      0.4rem
+      1.4rem;
+  }
+
+
+  .pathway {
+    margin-top: 0.6rem;
+  }
+
+
+  .note {
+    margin-top: 0.5rem;
+
+    padding:
+      0.45rem
+      0.7rem;
+  }
+
+
+  .takeaways li {
+    margin: 0.45rem 0;
+
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+  }
+
+
+  .lcc-resource {
+    margin-top: 0.3rem;
+  }
+
+
+  .lcc-resource p {
+    margin: 0.2rem 0;
+
+    font-size:
+      clamp(
+        0.8rem,
+        1vw,
+        1rem
+      );
+  }
+
+
+  .slide-nav {
+    margin-top: 0.45rem;
+
+    padding-top: 0.35rem;
+  }
+
+
+  .nav-button {
+    min-height: 34px;
+
+    padding:
+      0.3rem
+      0.5rem;
+
+    font-size: 0.9rem;
+  }
+
+
+  .activity-layout {
+    gap: 0.75rem;
+  }
+
+
+  .activity-list li {
+    margin: 0.25em 0;
+
+    font-size:
+      clamp(
+        0.9rem,
+        1.15vw,
+        1.1rem
+      );
+  }
+
+
+  .activity-slide .callout {
+    margin-top: 0.5rem;
+  }
+
+
+  .activity-slide .callout p {
+    font-size:
+      clamp(
+        0.8rem,
+        1vw,
+        1rem
+      );
+  }
+
 
   .activity-timer {
-    max-width: 500px;
-    width: 100%;
+    padding: 0.5rem;
   }
+
+
+  .timer-label {
+    margin-bottom: 0.25rem;
+  }
+
 
   .visual-clock {
-    width: min(100%, 290px);
+    width:
+      min(
+        100%,
+        190px
+      );
+
+    margin-bottom: 0.35rem;
   }
+
+
+  .timer-display {
+    font-size:
+      clamp(
+        2.2rem,
+        3vw,
+        3rem
+      );
+  }
+
+
+  .timer-controls button {
+    min-height: 34px;
+
+    padding:
+      0.3rem
+      0.45rem;
+  }
+
+
+  .timer-status {
+    margin-top: 0.25rem;
+  }
+
 }
+
 
 /* =========================================================
-   REDUCED MOTION
+   VERY SHORT PROJECTOR SCREEN
    ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@media (max-height: 650px) {
+
+  .slide-inner {
+    padding-top: 0.6rem;
   }
+
+
+  h2 {
+    font-size:
+      clamp(
+        1.7rem,
+        3vw,
+        2.6rem
+      );
+  }
+
+
+  p,
+  li,
+  blockquote {
+    font-size:
+      clamp(
+        0.82rem,
+        1.15vw,
+        1.05rem
+      );
+  }
+
+
+  .visual-clock {
+    width: 155px;
+  }
+
+
+  .slide-nav {
+    margin-top: 0.25rem;
+  }
+
 }
+
 
 /* =========================================================
    PRINT
    ========================================================= */
 
 @media print {
+
   html,
-  body,
-  .deck {
+  body {
+    width: auto;
     height: auto;
+
     overflow: visible;
-    background: white;
+
+    background: #ffffff;
   }
 
-  .slide {
-    min-height: 7.5in;
-    page-break-after: always;
-    border-top-width: 8px;
-    border-bottom-width: 8px;
+
+  .deck {
+    width: auto;
+    height: auto;
+
+    overflow: visible;
   }
+
+
+  .slide,
+  .slide.active {
+    position: relative;
+
+    display: flex;
+
+    width: 100%;
+    height: auto;
+    min-height: 7.5in;
+
+    page-break-after: always;
+  }
+
 
   .slide-nav,
-  .skip-link,
   .timer-controls,
   .timer-status {
     display: none;
   }
+
 }
