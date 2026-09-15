@@ -213,7 +213,6 @@
         <div class="service-list">
           <div>
             <h3>Resources</h3>
-
             <p>
               Books, scholarly articles, newspapers, magazines,
               citation guides, and more.
@@ -222,7 +221,6 @@
 
           <div>
             <h3>Spaces</h3>
-
             <p>
               Computers, study rooms, quiet study areas,
               and Andersen Library spaces.
@@ -231,7 +229,6 @@
 
           <div>
             <h3>People</h3>
-
             <p>
               An on-site librarian, Ask a Librarian chat,
               and subject-specialist librarians at Whitewater.
@@ -240,7 +237,6 @@
 
           <div>
             <h3>Equipment</h3>
-
             <p>
               Laptops, calculators, a VR headset, webcams,
               printing, and other technology.
@@ -272,7 +268,6 @@
         <div class="floor-grid" role="list">
           <article class="floor-card" role="listitem">
             <p class="floor-label">Main / upper level</p>
-
             <h3>Start here</h3>
 
             <ul>
@@ -286,7 +281,6 @@
 
           <article class="floor-card" role="listitem">
             <p class="floor-label">Lower level</p>
-
             <h3>More library space</h3>
 
             <ul>
@@ -379,7 +373,6 @@
         <div class="card-grid three" role="list">
           <article class="card" role="listitem">
             <h3>Research@UWW</h3>
-
             <p>
               Search across books, articles, and other library materials.
             </p>
@@ -387,7 +380,6 @@
 
           <article class="card" role="listitem">
             <h3>Articles / Databases</h3>
-
             <p>
               Go directly to subject databases and research tools.
             </p>
@@ -395,7 +387,6 @@
 
           <article class="card" role="listitem">
             <h3>Get Help</h3>
-
             <p>
               Find ways to contact a librarian when you need support.
             </p>
@@ -514,7 +505,6 @@
         <ol class="takeaways">
           <li>
             <strong>The library is more than books.</strong>
-
             <span>
               It is a place, a set of resources, and a group of people
               who can help you.
@@ -523,7 +513,6 @@
 
           <li>
             <strong>You can ask for help early.</strong>
-
             <span>
               You do not have to wait until you are completely stuck.
             </span>
@@ -531,7 +520,6 @@
 
           <li>
             <strong>The library is here and online.</strong>
-
             <span>
               Lenox Library is in Allen Hall, and library resources are
               available through the UW–Whitewater Libraries website.
@@ -598,43 +586,60 @@
           </div>
 
 
-          <!-- VISUAL COUNTDOWN TIMER -->
+          <!-- SVG VISUAL COUNTDOWN TIMER -->
           <aside
             class="activity-timer"
             aria-label="15 minute visual activity countdown"
           >
             <p class="timer-label">Time remaining</p>
 
-            <div
-              class="visual-clock"
-              id="visual-clock"
-              aria-hidden="true"
-            >
-              <div class="clock-face">
+            <div class="visual-clock">
 
-                <div
-                  class="clock-fill"
-                  id="clock-fill"
-                ></div>
+              <svg
+                class="timer-svg"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- Pale lavender elapsed-time background -->
+                <circle
+                  class="timer-background"
+                  cx="50"
+                  cy="50"
+                  r="48"
+                ></circle>
 
-                <div class="clock-center">
-                  <p
-                    class="timer-display"
-                    id="activity-timer"
-                  >
-                    15:00
-                  </p>
+                <!-- Purple remaining-time sector -->
+                <path
+                  class="timer-sector"
+                  id="timer-sector"
+                  d="
+                    M 50 2
+                    A 48 48 0 1 1 49.999 2
+                    A 48 48 0 1 1 50 2
+                    Z
+                  "
+                ></path>
+              </svg>
 
-                  <p
-                    class="timer-center-label"
-                    id="timer-center-label"
-                  >
-                    remaining
-                  </p>
-                </div>
+              <div class="timer-text">
+                <p
+                  class="timer-display"
+                  id="activity-timer"
+                >
+                  15:00
+                </p>
 
+                <p
+                  class="timer-center-label"
+                  id="timer-center-label"
+                >
+                  remaining
+                </p>
               </div>
+
             </div>
+
 
             <p
               class="sr-only"
@@ -644,6 +649,7 @@
             >
               15 minutes remaining
             </p>
+
 
             <div class="timer-controls">
               <button type="button" id="timer-start">
@@ -659,6 +665,7 @@
               </button>
             </div>
 
+
             <p
               class="timer-status"
               id="timer-status"
@@ -669,6 +676,7 @@
           </aside>
 
         </div>
+
 
         <nav class="slide-nav" aria-label="Slide navigation">
           <a href="#slide-10">
@@ -685,7 +693,7 @@
   </main>
 
 
-  <!-- 15-MINUTE VISUAL COUNTDOWN -->
+  <!-- SVG 15-MINUTE COUNTDOWN -->
   <script>
     (() => {
       const TIMER_LENGTH = 15 * 60;
@@ -700,8 +708,8 @@
       const accessibleTimer =
         document.getElementById("timer-accessible");
 
-      const clockFill =
-        document.getElementById("clock-fill");
+      const timerSector =
+        document.getElementById("timer-sector");
 
       const timerCard =
         document.querySelector(".activity-timer");
@@ -737,6 +745,64 @@
       }
 
 
+      /*
+        Creates a FILLED SVG pie sector.
+
+        Purple sector = time remaining.
+        Lavender circle underneath = elapsed time.
+
+        This does not use CSS gradients.
+      */
+      function createSectorPath(fraction) {
+        const cx = 50;
+        const cy = 50;
+        const radius = 48;
+
+        if (fraction >= 0.999999) {
+          return `
+            M ${cx} ${cy - radius}
+            A ${radius} ${radius} 0 1 1 ${cx - 0.001} ${cy - radius}
+            A ${radius} ${radius} 0 1 1 ${cx} ${cy - radius}
+            Z
+          `;
+        }
+
+
+        if (fraction <= 0) {
+          return "";
+        }
+
+
+        const angle =
+          fraction * Math.PI * 2;
+
+        /*
+          Start at 12 o'clock and move clockwise.
+        */
+        const endX =
+          cx + radius * Math.sin(angle);
+
+        const endY =
+          cy - radius * Math.cos(angle);
+
+        const largeArcFlag =
+          fraction > 0.5 ? 1 : 0;
+
+
+        return `
+          M ${cx} ${cy}
+          L ${cx} ${cy - radius}
+          A ${radius} ${radius}
+            0
+            ${largeArcFlag}
+            1
+            ${endX}
+            ${endY}
+          Z
+        `;
+      }
+
+
       function updateClock() {
         const fractionRemaining =
           Math.max(
@@ -747,11 +813,16 @@
             )
           );
 
-        const degreesRemaining =
-          fractionRemaining * 360;
 
         display.textContent =
           formatTime(timeRemaining);
+
+
+        timerSector.setAttribute(
+          "d",
+          createSectorPath(fractionRemaining)
+        );
+
 
         const minutes =
           Math.floor(timeRemaining / 60);
@@ -759,31 +830,15 @@
         const seconds =
           timeRemaining % 60;
 
+
         accessibleTimer.textContent =
           `${minutes} minutes ${seconds} seconds remaining`;
-
-
-        /*
-          VISUAL COUNTDOWN
-
-          Purple = time remaining.
-          Pale lavender = elapsed time.
-
-          The purple portion disappears as
-          the countdown approaches zero.
-        */
-
-        clockFill.style.background =
-          `conic-gradient(
-            from 0deg,
-            var(--purple-700) 0deg ${degreesRemaining}deg,
-            var(--purple-100) ${degreesRemaining}deg 360deg
-          )`;
 
 
         const warning =
           timeRemaining <= 60 &&
           timeRemaining > 0;
+
 
         timerCard.classList.toggle(
           "timer-warning",
@@ -802,8 +857,10 @@
           return;
         }
 
+
         const millisecondsRemaining =
           endTime - Date.now();
+
 
         timeRemaining =
           Math.max(
@@ -812,6 +869,7 @@
               millisecondsRemaining / 1000
             )
           );
+
 
         updateClock();
 
@@ -833,22 +891,28 @@
           return;
         }
 
+
         endTime =
           Date.now() +
           (timeRemaining * 1000);
+
 
         timerCard.classList.add(
           "timer-running"
         );
 
+
         timerCard.classList.remove(
           "timer-finished"
         );
 
+
         status.textContent =
           "Timer running.";
 
+
         tick();
+
 
         timerInterval =
           setInterval(
@@ -863,16 +927,21 @@
           return;
         }
 
+
         tick();
 
+
         clearInterval(timerInterval);
+
 
         timerInterval = null;
         endTime = null;
 
+
         timerCard.classList.remove(
           "timer-running"
         );
+
 
         status.textContent =
           "Timer paused.";
@@ -882,30 +951,40 @@
       function finishTimer() {
         clearInterval(timerInterval);
 
+
         timerInterval = null;
         endTime = null;
         timeRemaining = 0;
+
 
         timerCard.classList.remove(
           "timer-running",
           "timer-warning"
         );
 
+
         timerCard.classList.add(
           "timer-finished"
         );
 
+
+        timerSector.setAttribute(
+          "d",
+          ""
+        );
+
+
         display.textContent =
           "00:00";
+
 
         accessibleTimer.textContent =
           "Time is up.";
 
+
         centerLabel.textContent =
           "TIME’S UP!";
 
-        clockFill.style.background =
-          "var(--purple-100)";
 
         status.textContent =
           "Time’s up!";
@@ -915,11 +994,14 @@
       function resetTimer() {
         clearInterval(timerInterval);
 
+
         timerInterval = null;
         endTime = null;
 
+
         timeRemaining =
           TIMER_LENGTH;
+
 
         timerCard.classList.remove(
           "timer-running",
@@ -927,11 +1009,14 @@
           "timer-finished"
         );
 
+
         centerLabel.textContent =
           "remaining";
 
+
         status.textContent =
           "Ready when you are.";
+
 
         updateClock();
       }
@@ -942,10 +1027,12 @@
         startTimer
       );
 
+
       pauseButton.addEventListener(
         "click",
         pauseTimer
       );
+
 
       resetButton.addEventListener(
         "click",
