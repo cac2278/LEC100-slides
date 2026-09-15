@@ -1,6 +1,6 @@
 /* Accessible slide deck
    Designed for WCAG 2.2 AA contrast, large projected text, keyboard navigation,
-   reduced-motion preferences, semantic HTML, and an accessible activity timer. */
+   reduced-motion preferences, semantic HTML, and an accessible visual timer. */
 
 :root {
   --purple-900: #2f1747;
@@ -438,14 +438,14 @@ a:focus-visible {
 
 
 /* =========================================================
-   ACTIVITY SLIDE AND TIMER
+   ACTIVITY SLIDE
    ========================================================= */
 
 .activity-layout {
   display: grid;
   grid-template-columns:
-    minmax(0, 1.6fr)
-    minmax(300px, 0.7fr);
+    minmax(0, 1.55fr)
+    minmax(330px, 0.75fr);
   gap: 2.25rem;
   align-items: start;
 }
@@ -466,16 +466,21 @@ a:focus-visible {
   font-size: clamp(1.15rem, 1.45vw, 1.45rem);
 }
 
+
+/* =========================================================
+   VISUAL COUNTDOWN TIMER
+   ========================================================= */
+
 .activity-timer {
   background: var(--purple-100);
   border: 4px solid var(--purple-700);
   border-radius: 22px;
-  padding: 1.8rem 1.4rem;
+  padding: 1.45rem 1.25rem 1.3rem;
   text-align: center;
 }
 
 .timer-label {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.7rem;
   max-width: none;
   color: var(--purple-700);
   font-size: clamp(1.05rem, 1.3vw, 1.25rem);
@@ -484,16 +489,75 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
+
+/* Clock */
+
+.countdown-clock {
+  position: relative;
+  width: min(100%, 300px);
+  aspect-ratio: 1;
+  margin: 0 auto 1.1rem;
+}
+
+.countdown-ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.countdown-ring-track,
+.countdown-ring-progress {
+  fill: none;
+  stroke-width: 16;
+}
+
+.countdown-ring-track {
+  stroke: #d7ccdf;
+}
+
+.countdown-ring-progress {
+  stroke: var(--purple-700);
+  stroke-linecap: round;
+  transition:
+    stroke-dashoffset 0.25s linear,
+    stroke 0.2s ease;
+}
+
+.countdown-clock-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
 .timer-display {
-  margin: 0.15rem 0 1.25rem;
+  margin: 0;
   max-width: none;
   color: var(--purple-900);
-  font-size: clamp(4.2rem, 7vw, 6.5rem);
+  font-size: clamp(3.25rem, 5vw, 4.8rem);
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   font-variant-numeric: tabular-nums;
 }
+
+.timer-center-label {
+  margin: 0.55rem 0 0;
+  max-width: none;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+
+/* Timer controls */
 
 .timer-controls {
   display: flex;
@@ -527,7 +591,7 @@ a:focus-visible {
 }
 
 .timer-status {
-  margin: 1rem 0 0;
+  margin: 0.8rem 0 0;
   max-width: none;
   min-height: 1.5em;
   color: var(--muted);
@@ -535,16 +599,35 @@ a:focus-visible {
   font-weight: 700;
 }
 
-.timer-display.timer-warning {
+
+/* Final-minute warning */
+
+.activity-timer.timer-warning {
+  border-color: #8a3b00;
+}
+
+.activity-timer.timer-warning .countdown-ring-progress {
+  stroke: #8a3b00;
+}
+
+.activity-timer.timer-warning .timer-display {
   color: #8a3b00;
 }
 
-.timer-display.timer-finished {
-  color: #8b0000;
-}
+
+/* Time finished */
 
 .activity-timer.timer-finished {
   border-color: #8b0000;
+}
+
+.activity-timer.timer-finished .countdown-ring-progress {
+  stroke: #8b0000;
+}
+
+.activity-timer.timer-finished .timer-display,
+.activity-timer.timer-finished .timer-center-label {
+  color: #8b0000;
 }
 
 
@@ -586,6 +669,10 @@ a:focus-visible {
     max-width: 500px;
     width: 100%;
   }
+
+  .countdown-clock {
+    width: min(100%, 280px);
+  }
 }
 
 
@@ -596,6 +683,10 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .countdown-ring-progress {
+    transition: none;
   }
 }
 
@@ -627,4 +718,3 @@ a:focus-visible {
     display: none;
   }
 }
-  
