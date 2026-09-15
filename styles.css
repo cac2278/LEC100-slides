@@ -1,8 +1,13 @@
 /* =========================================================
    LEC 100 — CLEAN PRESENTATION CSS
-   Explicit presentation sizing
-   Larger Slide 9 text
-   Large Slide 11 activity + timer
+   FINAL CLEAN VERSION
+
+   - Large presentation-scale typography
+   - Slide 9 specifically enlarged
+   - Slide 11 large activity layout
+   - SVG visual timer preserved
+   - Navigation preserved
+   - No scrolling
    ========================================================= */
 
 :root {
@@ -590,108 +595,143 @@ button:focus-visible {
 
 
 /* =========================================================
-   SLIDE 9
-   LARGER TEXT WHILE PRESERVING FIT
+   SLIDE 9 — CALL NUMBERS
+
+   IMPORTANT:
+   These selectors match the actual Slide 9 HTML.
+   The text is intentionally much larger.
    ========================================================= */
 
 #slide-9 .slide-inner {
   width: 95vw;
   max-width: 1450px;
 
-  padding-top: 8px;
-  padding-bottom: 4px;
+  padding-top: 6px;
+  padding-bottom: 3px;
 }
 
 #slide-9 h2 {
-  margin-bottom: 7px;
+  margin: 0 0 8px;
 
-  font-size: 46px;
+  font-size: 52px;
+  line-height: 1.02;
 }
 
 #slide-9 .two-col {
   grid-template-columns:
-    minmax(0, 1.3fr)
-    minmax(360px, 0.7fr);
+    minmax(0, 1.35fr)
+    minmax(340px, 0.65fr);
 
-  gap: 18px;
+  gap: 22px;
+
+  align-items: center;
 }
 
 #slide-9 .lead {
-  margin-top: 0;
-  margin-bottom: 5px;
+  margin: 0 0 8px;
 
-  font-size: 23px;
-  line-height: 1.2;
+  font-size: 28px;
+  line-height: 1.18;
 }
 
-#slide-9 .two-col p {
-  margin: 4px 0;
 
-  font-size: 19px;
-  line-height: 1.25;
+/*
+   These are the two explanatory paragraphs
+   beneath the opening statement.
+*/
+
+#slide-9 .two-col p:not(.lead):not(.floor-label):not(.call-number) {
+  margin: 7px 0;
+
+  font-size: 24px;
+  line-height: 1.22;
 }
+
+
+/* Call-number example box */
 
 #slide-9 .callout {
-  padding: 9px 13px;
+  padding: 14px 18px;
 }
 
-#slide-9 .floor-label {
-  margin-bottom: 2px;
+#slide-9 .callout .floor-label {
+  margin: 0 0 4px;
 
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #slide-9 .call-number {
-  margin: 4px 0;
+  margin: 5px 0;
 
   color: var(--purple-900);
 
-  font-size: 34px;
-  line-height: 1.1;
+  font-size: 40px;
+  line-height: 1.05;
 
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
+
+#slide-9 .callout p:last-child {
+  margin: 5px 0 0;
+
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+
+/* "For today, remember" box */
 
 #slide-9 .note {
-  margin-top: 5px;
+  margin: 9px 0 0;
 
-  padding: 5px 10px;
+  padding: 8px 13px;
 
-  font-size: 17px;
+  font-size: 21px;
   line-height: 1.2;
 }
+
+
+/* LCC resource */
 
 #slide-9 .lcc-resource {
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-#slide-9 .lcc-resource p {
-  margin: 2px 0;
+#slide-9 .lcc-resource > p {
+  margin: 3px 0;
 
-  font-size: 16px;
-  line-height: 1.2;
+  font-size: 19px;
+  line-height: 1.15;
 }
+
+
+/* Inclusive-language note */
 
 #slide-9 .language-note {
-  padding: 5px 8px;
+  margin-top: 5px;
+
+  padding: 7px 10px;
 
   background: var(--soft);
 
   border-left: 5px solid var(--purple-700);
 
-  font-size: 16px;
-  line-height: 1.2;
+  font-size: 18px !important;
+  line-height: 1.18;
 }
 
+
+/* Slide 9 navigation */
+
 #slide-9 .slide-nav {
-  margin-top: 5px;
+  margin-top: 6px;
   padding-top: 4px;
 }
 
 
 /* =========================================================
    SLIDE 11 — ACTIVITY
-   INTENTIONALLY LARGE
+   PRESERVED FROM WORKING VERSION
    ========================================================= */
 
 #slide-11 .slide-inner {
@@ -751,6 +791,7 @@ button:focus-visible {
 
 /* =========================================================
    SLIDE 11 TIMER
+   PRESERVED
    ========================================================= */
 
 #slide-11 .activity-timer {
@@ -927,6 +968,8 @@ button:focus-visible {
 
 /* =========================================================
    EMERGENCY RULE FOR VERY SHORT WINDOWS ONLY
+
+   This does NOT activate on a normal presentation window.
    ========================================================= */
 
 @media (max-height: 620px) {
@@ -951,35 +994,48 @@ button:focus-visible {
   }
 
 
-  /* Slide 9 */
+  /* -----------------------------------------
+     Slide 9
+     Still kept readable on a very short screen
+     ----------------------------------------- */
 
   #slide-9 h2 {
-    font-size: 38px;
+    font-size: 42px;
   }
 
   #slide-9 .lead {
-    font-size: 19px;
+    font-size: 23px;
   }
 
-  #slide-9 .two-col p {
-    font-size: 16px;
+  #slide-9 .two-col p:not(.lead):not(.floor-label):not(.call-number) {
+    font-size: 20px;
   }
 
   #slide-9 .call-number {
-    font-size: 29px;
+    font-size: 34px;
+  }
+
+  #slide-9 .callout p:last-child {
+    font-size: 18px;
   }
 
   #slide-9 .note {
-    font-size: 14px;
+    font-size: 18px;
   }
 
-  #slide-9 .lcc-resource p,
+  #slide-9 .lcc-resource > p {
+    font-size: 16px;
+  }
+
   #slide-9 .language-note {
-    font-size: 13px;
+    font-size: 15px !important;
   }
 
 
-  /* Slide 11 */
+  /* -----------------------------------------
+     Slide 11
+     Preserved
+     ----------------------------------------- */
 
   #slide-11 h2 {
     font-size: 46px;
