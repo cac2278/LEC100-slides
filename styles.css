@@ -1,8 +1,7 @@
 /* =========================================================
-   LEC 100 — CLEAN REPLACEMENT CSS
-   Larger presentation text
-   Slide 9 protected for fit
-   Slide 11 intentionally large
+   LEC 100 — CLEAN PRESENTATION CSS
+   Explicit presentation sizing
+   No competing shrink rules
    ========================================================= */
 
 :root {
@@ -19,8 +18,6 @@
   --border: #d8d2df;
 
   --focus: #0a5bd8;
-
-  --max-width: 1380px;
 }
 
 
@@ -43,15 +40,10 @@ body {
 }
 
 body {
-  font-family:
-    Arial,
-    Helvetica,
-    system-ui,
-    sans-serif;
-
+  font-family: Arial, Helvetica, system-ui, sans-serif;
   color: var(--ink);
   background: var(--purple-900);
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 
@@ -70,12 +62,12 @@ body {
   position: absolute;
   inset: 0;
 
-  width: 100%;
-  height: 100%;
-
   display: none;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 100%;
 
   overflow: hidden;
 
@@ -92,12 +84,11 @@ body {
 .slide-inner {
   position: relative;
 
-  width: min(95vw, var(--max-width));
-  max-height: calc(100vh - 28px);
+  width: 94vw;
+  max-width: 1400px;
 
   margin: 0 auto;
-
-  padding: 2rem 1rem 1rem;
+  padding: 24px 18px 14px;
 }
 
 .title-slide {
@@ -124,34 +115,38 @@ h3 {
 }
 
 h1 {
-  margin-bottom: 0.8rem;
-  font-size: clamp(4.2rem, 7vw, 7rem);
+  margin-bottom: 14px;
+  font-size: 72px;
 }
 
 h2 {
-  margin-bottom: 0.9rem;
-  font-size: clamp(3.2rem, 5vw, 5.2rem);
+  margin-bottom: 18px;
+  font-size: 54px;
 }
 
 h3 {
-  margin-bottom: 0.4rem;
-  font-size: clamp(2rem, 2.6vw, 2.7rem);
+  margin-bottom: 8px;
+  font-size: 30px;
 }
 
 p,
 li,
 blockquote {
-  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-size: 24px;
 }
 
 p {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
-.subtitle,
-.lead {
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+li {
+  margin: 7px 0;
+}
+
+.lead,
+.subtitle {
+  font-size: 30px;
 }
 
 .subtitle {
@@ -160,11 +155,11 @@ p {
 }
 
 .eyebrow {
-  margin: 0 0 0.4rem;
+  margin: 0 0 7px;
 
   color: var(--purple-700);
 
-  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-size: 17px;
   font-weight: 800;
 
   letter-spacing: 0.08em;
@@ -180,33 +175,33 @@ p {
   position: absolute;
 
   top: 0;
-  right: 1rem;
+  right: 12px;
 
   margin: 0;
 
   color: var(--muted);
 
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 700;
 }
 
 
 /* =========================================================
-   TITLE SLIDE / PRESENTER
+   PRESENTER
    ========================================================= */
 
 .presenter {
   max-width: 900px;
 
-  margin-top: 1.4rem;
-  padding-left: 1rem;
+  margin-top: 20px;
+  padding-left: 16px;
 
   border-left: 7px solid var(--purple-700);
 }
 
 .presenter p {
-  margin: 0.16rem 0;
-  font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+  margin: 3px 0;
+  font-size: 20px;
 }
 
 .pronouns {
@@ -220,11 +215,7 @@ p {
 
 ul,
 ol {
-  padding-left: 1.4em;
-}
-
-li {
-  margin: 0.32em 0;
+  padding-left: 1.35em;
 }
 
 .big-list {
@@ -232,12 +223,13 @@ li {
 }
 
 .big-list li {
-  margin: 0.45em 0;
+  margin: 11px 0;
+  font-size: 26px;
 }
 
 
 /* =========================================================
-   TWO COLUMN
+   TWO COLUMNS
    ========================================================= */
 
 .two-col {
@@ -247,7 +239,7 @@ li {
     minmax(0, 1.35fr)
     minmax(300px, 0.65fr);
 
-  gap: 1.5rem;
+  gap: 24px;
 
   align-items: start;
 }
@@ -258,7 +250,7 @@ li {
    ========================================================= */
 
 .callout {
-  padding: 1.15rem;
+  padding: 18px;
 
   background: var(--purple-100);
 
@@ -275,21 +267,21 @@ li {
 }
 
 .callout.compact {
-  margin-top: 1rem;
+  margin-top: 14px;
 }
 
 .contact-block {
-  margin-top: 0.9rem;
+  margin-top: 12px;
   font-weight: 700;
 }
 
 .contact-block p {
-  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+  font-size: 19px;
 }
 
 
 /* =========================================================
-   QUOTE GRID
+   QUOTES
    ========================================================= */
 
 .quote-grid {
@@ -298,13 +290,12 @@ li {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 0.8rem;
+  gap: 12px;
 }
 
 blockquote {
   margin: 0;
-
-  padding: 0.85rem 1rem;
+  padding: 14px 16px;
 
   background: var(--soft);
 
@@ -325,18 +316,18 @@ blockquote {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 0.8rem 1.75rem;
+  gap: 14px 28px;
 }
 
 .service-list > div {
-  padding: 0.3rem 0 0.5rem 1rem;
+  padding: 5px 0 7px 15px;
 
   border-left: 7px solid var(--purple-700);
 }
 
 .service-list p {
   margin: 0;
-  font-size: clamp(1.3rem, 1.75vw, 1.75rem);
+  font-size: 23px;
 }
 
 
@@ -350,11 +341,11 @@ blockquote {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 1rem;
+  gap: 16px;
 }
 
 .floor-card {
-  padding: 1.2rem;
+  padding: 18px;
 
   background: var(--soft);
 
@@ -363,7 +354,7 @@ blockquote {
 }
 
 .floor-card li {
-  font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+  font-size: 22px;
 }
 
 .floor-label {
@@ -371,7 +362,7 @@ blockquote {
 
   color: var(--purple-700);
 
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 800;
 
   letter-spacing: 0.04em;
@@ -384,20 +375,19 @@ blockquote {
    ========================================================= */
 
 .note {
-  margin-top: 0.8rem;
-
-  padding: 0.65rem 1rem;
+  margin-top: 12px;
+  padding: 10px 15px;
 
   background: var(--purple-100);
 
   border-left: 7px solid var(--purple-700);
 
-  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  font-size: 19px;
 }
 
 
 /* =========================================================
-   ROCK + UWW PATHWAY
+   ROCK + UW-WHITEWATER PATHWAY
    ========================================================= */
 
 .pathway {
@@ -408,15 +398,15 @@ blockquote {
     auto
     1fr;
 
-  gap: 1rem;
+  gap: 16px;
 
   align-items: center;
 
-  margin-top: 1.1rem;
+  margin-top: 18px;
 }
 
 .path-box {
-  padding: 1.25rem;
+  padding: 18px;
 
   background: #ffffff;
 
@@ -426,14 +416,13 @@ blockquote {
 
 .path-box p {
   margin-bottom: 0;
-
-  font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+  font-size: 22px;
 }
 
 .arrow {
   color: var(--purple-700);
 
-  font-size: 3rem;
+  font-size: 46px;
   font-weight: 900;
 }
 
@@ -448,11 +437,11 @@ blockquote {
   grid-template-columns:
     repeat(3, minmax(0, 1fr));
 
-  gap: 1rem;
+  gap: 16px;
 }
 
 .card {
-  padding: 1.25rem;
+  padding: 18px;
 
   background: var(--soft);
 
@@ -461,43 +450,12 @@ blockquote {
 }
 
 .card p {
-  font-size: clamp(1.25rem, 1.65vw, 1.65rem);
+  font-size: 21px;
 }
 
 .web-link {
-  margin-top: 1rem;
+  margin-top: 14px;
   font-weight: 800;
-}
-
-
-/* =========================================================
-   CALL NUMBER GENERAL
-   ========================================================= */
-
-.call-number {
-  color: var(--purple-900);
-
-  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
-
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-}
-
-.lcc-resource {
-  margin-top: 0.6rem;
-}
-
-.lcc-resource p {
-  margin: 0.35rem 0;
-  font-size: clamp(0.9rem, 1.15vw, 1.15rem);
-}
-
-.language-note {
-  padding: 0.55rem 0.8rem;
-
-  background: var(--soft);
-
-  border-left: 5px solid var(--purple-700);
 }
 
 
@@ -509,7 +467,7 @@ blockquote {
   list-style: none;
 
   padding: 0;
-  margin: 0.5rem 0 0;
+  margin: 8px 0 0;
 
   counter-reset: takeaway;
 }
@@ -519,13 +477,15 @@ blockquote {
 
   position: relative;
 
-  margin: 0.7rem 0;
+  margin: 12px 0;
 
-  padding: 0.75rem 1rem 0.75rem 4.4rem;
+  padding: 13px 16px 13px 68px;
 
   background: var(--soft);
 
   border-left: 8px solid var(--purple-700);
+
+  font-size: 24px;
 }
 
 .takeaways li::before {
@@ -533,7 +493,7 @@ blockquote {
 
   position: absolute;
 
-  left: 1rem;
+  left: 16px;
   top: 50%;
 
   transform: translateY(-50%);
@@ -543,15 +503,15 @@ blockquote {
   align-items: center;
   justify-content: center;
 
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 38px;
+  height: 38px;
 
   color: #ffffff;
-
   background: var(--purple-800);
 
   border-radius: 50%;
 
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -562,11 +522,11 @@ blockquote {
 .takeaways span {
   display: block;
 
-  margin-top: 0.15rem;
+  margin-top: 3px;
 
   color: var(--muted);
 
-  font-size: 0.88em;
+  font-size: 20px;
 }
 
 
@@ -598,18 +558,18 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
 
-  gap: 1rem;
+  gap: 16px;
 
-  margin-top: 0.9rem;
-  padding-top: 0.55rem;
+  margin-top: 12px;
+  padding-top: 8px;
 
   border-top: 2px solid var(--border);
 }
 
 .nav-button {
-  min-height: 40px;
+  min-height: 36px;
 
-  padding: 0.45rem 0.7rem;
+  padding: 5px 8px;
 
   color: #174ea6;
   background: transparent;
@@ -617,7 +577,7 @@ button:focus-visible {
   border: 0;
 
   font: inherit;
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 800;
 
   text-decoration: underline;
@@ -629,12 +589,163 @@ button:focus-visible {
 
 
 /* =========================================================
-   TIMER — GENERAL
-   SVG COLORS REMAIN IN HTML
+   SLIDE 9
+   ONLY SLIDE THAT IS DELIBERATELY SMALLER
    ========================================================= */
 
-.activity-timer {
-  padding: 0.8rem 1rem;
+#slide-9 .slide-inner {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+#slide-9 h2 {
+  margin-bottom: 7px;
+  font-size: 38px;
+}
+
+#slide-9 .two-col {
+  gap: 16px;
+}
+
+#slide-9 .lead {
+  margin-top: 0;
+  margin-bottom: 5px;
+
+  font-size: 18px;
+}
+
+#slide-9 .two-col p {
+  margin: 4px 0;
+
+  font-size: 15px;
+}
+
+#slide-9 .callout {
+  padding: 9px 12px;
+}
+
+#slide-9 .floor-label {
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+#slide-9 .call-number {
+  margin: 4px 0;
+
+  color: var(--purple-900);
+
+  font-size: 30px;
+  line-height: 1.15;
+
+  letter-spacing: 0.04em;
+}
+
+#slide-9 .note {
+  margin-top: 5px;
+  padding: 5px 10px;
+
+  font-size: 13px;
+}
+
+#slide-9 .lcc-resource {
+  margin-top: 4px;
+}
+
+#slide-9 .lcc-resource p {
+  margin: 2px 0;
+
+  font-size: 12px;
+}
+
+#slide-9 .language-note {
+  padding: 5px 8px;
+
+  background: var(--soft);
+
+  border-left: 5px solid var(--purple-700);
+
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+#slide-9 .slide-nav {
+  margin-top: 5px;
+  padding-top: 4px;
+}
+
+
+/* =========================================================
+   SLIDE 11 — ACTIVITY
+   INTENTIONALLY LARGE
+   ========================================================= */
+
+#slide-11 .slide-inner {
+  width: 95vw;
+  max-width: 1450px;
+
+  padding: 12px 18px 8px;
+}
+
+#slide-11 h2 {
+  margin-bottom: 12px;
+
+  font-size: 60px;
+}
+
+
+/* Two strong columns */
+
+#slide-11 .activity-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    340px;
+
+  gap: 32px;
+
+  align-items: center;
+}
+
+
+/* Activity instructions */
+
+#slide-11 .activity-list {
+  margin: 0;
+  padding-left: 1.35em;
+}
+
+#slide-11 .activity-list li {
+  margin: 9px 0;
+
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+
+/* Activity callout */
+
+#slide-11 .callout.compact {
+  margin-top: 14px;
+
+  padding: 12px 16px;
+}
+
+#slide-11 .callout.compact p {
+  margin: 5px 0;
+
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   SLIDE 11 TIMER
+   LARGE VISUAL TIMER
+   ========================================================= */
+
+#slide-11 .activity-timer {
+  padding: 10px 12px;
 
   text-align: center;
 
@@ -644,37 +755,44 @@ button:focus-visible {
   border-radius: 20px;
 }
 
-.timer-label {
-  max-width: none;
-
-  margin: 0 0 0.4rem;
+#slide-11 .timer-label {
+  margin: 0 0 6px;
 
   color: var(--purple-700);
 
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 800;
 
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.visual-clock {
+
+/* This is the actual visible clock size */
+
+#slide-11 .visual-clock {
   position: relative;
 
-  width: min(100%, 270px);
-  aspect-ratio: 1;
+  width: 300px;
+  height: 300px;
 
-  margin: 0 auto 0.6rem;
+  margin: 0 auto 8px;
 }
 
-.timer-svg {
+
+/* SVG fills the full 300px clock */
+
+#slide-11 .timer-svg {
   display: block;
 
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
 }
 
-.timer-text {
+
+/* Timer text sits over SVG */
+
+#slide-11 .timer-text {
   position: absolute;
   inset: 0;
 
@@ -688,14 +806,15 @@ button:focus-visible {
   pointer-events: none;
 }
 
-.timer-display {
-  max-width: none;
 
+/* 15:00 */
+
+#slide-11 .timer-display {
   margin: 0;
 
   color: #ffffff;
 
-  font-size: clamp(3rem, 4vw, 4rem);
+  font-size: 52px;
   font-weight: 800;
 
   line-height: 1;
@@ -708,14 +827,15 @@ button:focus-visible {
     0 2px 7px rgba(47, 23, 71, 0.75);
 }
 
-.timer-center-label {
-  max-width: none;
 
-  margin: 0.4rem 0 0;
+/* "remaining" */
+
+#slide-11 .timer-center-label {
+  margin: 7px 0 0;
 
   color: #ffffff;
 
-  font-size: 0.85rem;
+  font-size: 13px;
   font-weight: 800;
 
   letter-spacing: 0.05em;
@@ -725,19 +845,22 @@ button:focus-visible {
     0 1px 5px rgba(47, 23, 71, 0.75);
 }
 
-.timer-controls {
+
+/* Timer controls */
+
+#slide-11 .timer-controls {
   display: flex;
 
   justify-content: center;
 
-  gap: 0.45rem;
+  gap: 7px;
 }
 
-.timer-controls button {
-  min-width: 76px;
-  min-height: 40px;
+#slide-11 .timer-controls button {
+  min-width: 78px;
+  min-height: 38px;
 
-  padding: 0.45rem 0.65rem;
+  padding: 6px 9px;
 
   color: var(--purple-900);
   background: #ffffff;
@@ -746,29 +869,30 @@ button:focus-visible {
   border-radius: 8px;
 
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 14px;
   font-weight: 800;
 
   cursor: pointer;
 }
 
-.timer-controls button:hover {
+#slide-11 .timer-controls button:hover {
   color: #ffffff;
   background: var(--purple-800);
 }
 
-.timer-status {
-  max-width: none;
+#slide-11 .timer-status {
+  min-height: 1.1em;
 
-  min-height: 1.2em;
-
-  margin: 0.35rem 0 0;
+  margin: 5px 0 0;
 
   color: var(--muted);
 
-  font-size: 0.85rem;
+  font-size: 12px;
   font-weight: 700;
 }
+
+
+/* Timer warning / finished states */
 
 .activity-timer.timer-warning {
   border-color: #8a3b00;
@@ -782,6 +906,14 @@ button:focus-visible {
 .activity-timer.timer-finished .timer-center-label {
   color: #8b0000;
   text-shadow: none;
+}
+
+
+/* Slide 11 navigation */
+
+#slide-11 .slide-nav {
+  margin-top: 7px;
+  padding-top: 5px;
 }
 
 
@@ -809,488 +941,95 @@ button:focus-visible {
 
 
 /* =========================================================
-   SHORTER LAPTOP / PROJECTOR SCREENS
+   ONLY ONE EMERGENCY HEIGHT RULE
 
-   Regular slides stay large.
+   This activates only on unusually short browser windows.
+   It does NOT affect normal laptop/projector screens.
    ========================================================= */
 
-@media (max-height: 800px) {
-
-  .slide-inner {
-    padding: 0.8rem 1rem 0.45rem;
-  }
+@media (max-height: 620px) {
 
   h1 {
-    font-size: clamp(3.7rem, 6vw, 5.5rem);
+    font-size: 56px;
   }
 
   h2 {
-    margin-bottom: 0.55rem;
-
-    font-size: clamp(2.8rem, 4.5vw, 4rem);
-  }
-
-  h3 {
-    font-size: clamp(1.65rem, 2.25vw, 2.15rem);
+    font-size: 44px;
   }
 
   p,
   li,
   blockquote {
-    font-size: clamp(1.25rem, 1.75vw, 1.6rem);
+    font-size: 19px;
   }
 
   .lead,
   .subtitle {
-    font-size: clamp(1.5rem, 2.1vw, 1.9rem);
+    font-size: 23px;
   }
 
-  .presenter {
-    margin-top: 0.7rem;
-  }
 
-  .presenter p {
-    font-size: clamp(1rem, 1.35vw, 1.25rem);
-  }
-
-  .big-list li {
-    margin: 0.28em 0;
-  }
-
-  .callout,
-  .card,
-  .floor-card,
-  .path-box {
-    padding: 0.75rem;
-  }
-
-  .quote-grid {
-    gap: 0.45rem;
-  }
-
-  blockquote {
-    padding: 0.55rem 0.75rem;
-  }
-
-  .service-list {
-    gap: 0.4rem 1.4rem;
-  }
-
-  .service-list p,
-  .floor-card li,
-  .path-box p,
-  .card p {
-    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-  }
-
-  .pathway {
-    margin-top: 0.6rem;
-  }
-
-  .note {
-    margin-top: 0.45rem;
-
-    padding: 0.45rem 0.7rem;
-  }
-
-  .takeaways li {
-    margin: 0.4rem 0;
-
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .slide-nav {
-    margin-top: 0.4rem;
-    padding-top: 0.3rem;
-  }
-
-  .nav-button {
-    min-height: 34px;
-
-    padding: 0.25rem 0.5rem;
-
-    font-size: 0.9rem;
-  }
-}
-
-
-/* =========================================================
-   SLIDE 9
-   THIS IS THE ONLY DELIBERATELY COMPACT CONTENT SLIDE
-   ========================================================= */
-
-#slide-9 .slide-inner {
-  padding-top: 0.65rem;
-  padding-bottom: 0.35rem;
-}
-
-#slide-9 h2 {
-  margin-bottom: 0.4rem;
-
-  font-size: clamp(2rem, 3.3vw, 3.1rem);
-}
-
-#slide-9 .two-col {
-  gap: 1rem;
-}
-
-#slide-9 .lead {
-  margin-top: 0;
-  margin-bottom: 0.3rem;
-
-  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
-}
-
-#slide-9 .two-col p {
-  margin-top: 0.22rem;
-  margin-bottom: 0.22rem;
-
-  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-}
-
-#slide-9 .callout {
-  padding: 0.6rem 0.8rem;
-}
-
-#slide-9 .floor-label {
-  margin-bottom: 0.15rem;
-
-  font-size: 0.8rem;
-}
-
-#slide-9 .call-number {
-  margin: 0.2rem 0;
-
-  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
-}
-
-#slide-9 .note {
-  margin-top: 0.3rem;
-
-  padding: 0.35rem 0.65rem;
-
-  font-size: clamp(0.85rem, 1.1vw, 1rem);
-}
-
-#slide-9 .lcc-resource {
-  margin-top: 0.2rem;
-}
-
-#slide-9 .lcc-resource p {
-  margin: 0.12rem 0;
-
-  font-size: clamp(0.76rem, 0.95vw, 0.92rem);
-}
-
-#slide-9 .language-note {
-  padding: 0.3rem 0.55rem;
-
-  font-size: clamp(0.74rem, 0.9vw, 0.88rem);
-
-  line-height: 1.2;
-}
-
-#slide-9 .slide-nav {
-  margin-top: 0.25rem;
-  padding-top: 0.2rem;
-}
-
-
-/* =========================================================
-   SLIDE 11 — LARGE ACTIVITY SLIDE
-
-   This is intentionally MUCH larger than before.
-   ========================================================= */
-
-#slide-11 .slide-inner {
-  width: min(96vw, 1420px);
-
-  padding-top: 0.65rem;
-  padding-bottom: 0.35rem;
-}
-
-#slide-11 h2 {
-  margin-bottom: 0.5rem;
-
-  font-size: clamp(3.4rem, 5vw, 4.8rem);
-}
-
-#slide-11 .activity-layout {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1.35fr)
-    minmax(320px, 0.65fr);
-
-  gap: 1.5rem;
-
-  align-items: center;
-}
-
-#slide-11 .activity-instructions {
-  min-width: 0;
-}
-
-#slide-11 .activity-list {
-  margin: 0;
-}
-
-#slide-11 .activity-list li {
-  margin: 0.38em 0;
-
-  font-size: clamp(1.4rem, 1.85vw, 1.75rem);
-
-  line-height: 1.3;
-}
-
-#slide-11 .callout.compact {
-  margin-top: 0.8rem;
-
-  padding: 0.8rem 1rem;
-}
-
-#slide-11 .callout.compact p {
-  margin: 0.3rem 0;
-
-  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
-
-  line-height: 1.3;
-}
-
-#slide-11 .activity-timer {
-  padding: 0.7rem 0.8rem;
-}
-
-#slide-11 .timer-label {
-  margin-bottom: 0.3rem;
-
-  font-size: 1rem;
-}
-
-#slide-11 .visual-clock {
-  width: min(100%, 260px);
-
-  margin-bottom: 0.45rem;
-}
-
-#slide-11 .timer-display {
-  font-size: clamp(3rem, 4vw, 3.8rem);
-}
-
-#slide-11 .timer-center-label {
-  font-size: 0.85rem;
-}
-
-#slide-11 .timer-controls button {
-  min-width: 76px;
-  min-height: 38px;
-
-  padding: 0.4rem 0.6rem;
-
-  font-size: 0.9rem;
-}
-
-#slide-11 .timer-status {
-  margin-top: 0.25rem;
-
-  font-size: 0.8rem;
-}
-
-#slide-11 .slide-nav {
-  margin-top: 0.4rem;
-  padding-top: 0.3rem;
-}
-
-
-/* =========================================================
-   SLIDE 9 ON SHORT SCREEN
-   ========================================================= */
-
-@media (max-height: 800px) {
-
-  #slide-9 .slide-inner {
-    padding-top: 0.35rem;
-  }
-
-  #slide-9 h2 {
-    margin-bottom: 0.25rem;
-
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-  }
-
-  #slide-9 .lead {
-    font-size: clamp(0.95rem, 1.25vw, 1.15rem);
-  }
-
-  #slide-9 .two-col p {
-    font-size: clamp(0.8rem, 1.05vw, 0.98rem);
-  }
-
-  #slide-9 .call-number {
-    font-size: clamp(1.4rem, 2vw, 1.9rem);
-  }
-
-  #slide-9 .note {
-    font-size: clamp(0.75rem, 0.95vw, 0.9rem);
-  }
-
-  #slide-9 .lcc-resource p {
-    font-size: clamp(0.68rem, 0.82vw, 0.8rem);
-  }
-
-  #slide-9 .language-note {
-    font-size: clamp(0.66rem, 0.8vw, 0.78rem);
-  }
-}
-
-
-/* =========================================================
-   SLIDE 11 ON SHORT SCREEN
-
-   Still deliberately large.
-   ========================================================= */
-
-@media (max-height: 800px) {
-
-  #slide-11 .slide-inner {
-    padding-top: 0.35rem;
-  }
+  /* Slide 11 remains prominent even here */
 
   #slide-11 h2 {
-    margin-bottom: 0.3rem;
+    font-size: 46px;
+  }
 
-    font-size: clamp(2.8rem, 4.3vw, 3.8rem);
+  #slide-11 .activity-list li {
+    margin: 5px 0;
+    font-size: 20px;
+  }
+
+  #slide-11 .callout.compact {
+    margin-top: 7px;
+    padding: 7px 10px;
+  }
+
+  #slide-11 .callout.compact p {
+    font-size: 15px;
   }
 
   #slide-11 .activity-layout {
     grid-template-columns:
-      minmax(0, 1.4fr)
-      minmax(280px, 0.6fr);
+      minmax(0, 1fr)
+      260px;
 
-    gap: 1rem;
+    gap: 18px;
   }
 
-  #slide-11 .activity-list li {
-    margin: 0.25em 0;
-
-    font-size: clamp(1.15rem, 1.55vw, 1.45rem);
-  }
-
-  #slide-11 .callout.compact {
-    margin-top: 0.5rem;
-
-    padding: 0.55rem 0.75rem;
-  }
-
-  #slide-11 .callout.compact p {
-    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-  }
-
-  #slide-11 .visual-clock {
-    width: 220px;
+  #slide-11 .visual-clock,
+  #slide-11 .timer-svg {
+    width: 230px;
+    height: 230px;
   }
 
   #slide-11 .timer-display {
-    font-size: 3rem;
-  }
-}
-
-
-/* =========================================================
-   VERY SHORT PROJECTOR SCREEN
-   ========================================================= */
-
-@media (max-height: 650px) {
-
-  .slide-inner {
-    padding-top: 0.4rem;
-  }
-
-  h1 {
-    font-size: clamp(3.2rem, 5.4vw, 4.7rem);
-  }
-
-  h2 {
-    font-size: clamp(2.3rem, 3.8vw, 3.2rem);
-  }
-
-  h3 {
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
-  }
-
-  p,
-  li,
-  blockquote {
-    font-size: clamp(1rem, 1.4vw, 1.25rem);
-  }
-
-  .lead,
-  .subtitle {
-    font-size: clamp(1.2rem, 1.7vw, 1.5rem);
-  }
-
-  .slide-nav {
-    margin-top: 0.2rem;
+    font-size: 42px;
   }
 
 
-  /* Slide 9 remains compact */
-
-  #slide-9 .slide-inner {
-    padding-top: 0.2rem;
-  }
+  /* Slide 9 */
 
   #slide-9 h2 {
-    font-size: clamp(1.6rem, 2.7vw, 2.3rem);
+    font-size: 32px;
   }
 
   #slide-9 .lead {
-    font-size: 0.95rem;
+    font-size: 15px;
   }
 
   #slide-9 .two-col p {
-    font-size: 0.8rem;
+    font-size: 12px;
   }
 
-  #slide-9 .note {
-    margin-top: 0.15rem;
-
-    font-size: 0.74rem;
+  #slide-9 .call-number {
+    font-size: 25px;
   }
 
+  #slide-9 .note,
   #slide-9 .lcc-resource p,
   #slide-9 .language-note {
-    font-size: 0.65rem;
-  }
-
-
-  /* Slide 11 stays readable and visually strong */
-
-  #slide-11 h2 {
-    font-size: clamp(2.4rem, 3.8vw, 3.2rem);
-  }
-
-  #slide-11 .activity-list li {
-    margin: 0.18em 0;
-
-    font-size: clamp(1rem, 1.35vw, 1.2rem);
-  }
-
-  #slide-11 .callout.compact {
-    margin-top: 0.35rem;
-  }
-
-  #slide-11 .callout.compact p {
-    font-size: clamp(0.8rem, 1vw, 0.95rem);
-  }
-
-  #slide-11 .visual-clock {
-    width: 180px;
-  }
-
-  #slide-11 .timer-display {
-    font-size: 2.5rem;
+    font-size: 10px;
   }
 }
 
