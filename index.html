@@ -16,7 +16,6 @@
     <section class="slide title-slide" id="slide-1" aria-labelledby="s1-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 1 of 11">1 / 11</p>
-
         <p class="eyebrow">LEC 100 · First Year Seminar</p>
 
         <h1 id="s1-title">Welcome to the Library</h1>
@@ -62,7 +61,6 @@
     <section class="slide" id="slide-2" aria-labelledby="s2-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 2 of 11">2 / 11</p>
-
         <p class="eyebrow">Today</p>
 
         <h2 id="s2-title">What we’ll cover</h2>
@@ -92,7 +90,6 @@
     <section class="slide" id="slide-3" aria-labelledby="s3-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 3 of 11">3 / 11</p>
-
         <p class="eyebrow">Meet your librarian</p>
 
         <h2 id="s3-title">You do not have to figure it out alone.</h2>
@@ -162,7 +159,6 @@
     <section class="slide" id="slide-4" aria-labelledby="s4-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 4 of 11">4 / 11</p>
-
         <p class="eyebrow">When to ask for help</p>
 
         <h2 id="s4-title">These are all librarian questions.</h2>
@@ -210,7 +206,6 @@
     <section class="slide" id="slide-5" aria-labelledby="s5-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 5 of 11">5 / 11</p>
-
         <p class="eyebrow">Library services</p>
 
         <h2 id="s5-title">More than books</h2>
@@ -218,6 +213,7 @@
         <div class="service-list">
           <div>
             <h3>Resources</h3>
+
             <p>
               Books, scholarly articles, newspapers, magazines,
               citation guides, and more.
@@ -226,6 +222,7 @@
 
           <div>
             <h3>Spaces</h3>
+
             <p>
               Computers, study rooms, quiet study areas,
               and Andersen Library spaces.
@@ -234,6 +231,7 @@
 
           <div>
             <h3>People</h3>
+
             <p>
               An on-site librarian, Ask a Librarian chat,
               and subject-specialist librarians at Whitewater.
@@ -242,6 +240,7 @@
 
           <div>
             <h3>Equipment</h3>
+
             <p>
               Laptops, calculators, a VR headset, webcams,
               printing, and other technology.
@@ -266,7 +265,6 @@
     <section class="slide" id="slide-6" aria-labelledby="s6-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 6 of 11">6 / 11</p>
-
         <p class="eyebrow">Lenox Library</p>
 
         <h2 id="s6-title">Where things are</h2>
@@ -321,7 +319,6 @@
     <section class="slide" id="slide-7" aria-labelledby="s7-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 7 of 11">7 / 11</p>
-
         <p class="eyebrow">Your library system</p>
 
         <h2 id="s7-title">Rock + UW–Whitewater Libraries</h2>
@@ -373,7 +370,6 @@
     <section class="slide" id="slide-8" aria-labelledby="s8-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 8 of 11">8 / 11</p>
-
         <p class="eyebrow">The library online</p>
 
         <h2 id="s8-title">Start at uww.edu/library</h2>
@@ -427,7 +423,6 @@
     <section class="slide" id="slide-9" aria-labelledby="s9-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 9 of 11">9 / 11</p>
-
         <p class="eyebrow">Finding books</p>
 
         <h2 id="s9-title">Call numbers are a book’s address</h2>
@@ -512,7 +507,6 @@
     <section class="slide" id="slide-10" aria-labelledby="s10-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 10 of 11">10 / 11</p>
-
         <p class="eyebrow">Before we practice</p>
 
         <h2 id="s10-title">Remember these three things</h2>
@@ -566,7 +560,6 @@
     >
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 11 of 11">11 / 11</p>
-
         <p class="eyebrow">Activity</p>
 
         <h2 id="s11-title">Explore the library</h2>
@@ -575,9 +568,7 @@
 
           <div class="activity-instructions">
             <ol class="big-list">
-              <li>
-                Find a partner or work with a small group.
-              </li>
+              <li>Find a partner or work with a small group.</li>
 
               <li>
                 Use the worksheet to locate a few different library resources.
@@ -607,7 +598,7 @@
           </div>
 
 
-          <!-- VISUAL COUNTDOWN CLOCK -->
+          <!-- VISUAL COUNTDOWN TIMER -->
           <aside
             class="activity-timer"
             aria-label="15 minute visual activity countdown"
@@ -732,8 +723,11 @@
 
 
       function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const secs = seconds % 60;
+        const minutes =
+          Math.floor(seconds / 60);
+
+        const secs =
+          seconds % 60;
 
         return (
           String(minutes).padStart(2, "0") +
@@ -768,26 +762,24 @@
         accessibleTimer.textContent =
           `${minutes} minutes ${seconds} seconds remaining`;
 
+
         /*
           VISUAL COUNTDOWN
 
-          At 15:00:
-          the entire clock is purple.
+          Purple = time remaining.
+          Pale lavender = elapsed time.
 
-          As time passes:
-          the white portion grows clockwise,
-          visually removing the purple time remaining.
-
-          At 00:00:
-          the purple area has completely disappeared.
+          The purple portion disappears as
+          the countdown approaches zero.
         */
 
         clockFill.style.background =
           `conic-gradient(
             from 0deg,
             var(--purple-700) 0deg ${degreesRemaining}deg,
-            #ffffff ${degreesRemaining}deg 360deg
+            var(--purple-100) ${degreesRemaining}deg 360deg
           )`;
+
 
         const warning =
           timeRemaining <= 60 &&
@@ -797,6 +789,7 @@
           "timer-warning",
           warning
         );
+
 
         if (timeRemaining === 0) {
           finishTimer();
@@ -821,6 +814,7 @@
           );
 
         updateClock();
+
 
         if (timeRemaining === 0) {
           clearInterval(timerInterval);
@@ -911,7 +905,7 @@
           "TIME’S UP!";
 
         clockFill.style.background =
-          "#ffffff";
+          "var(--purple-100)";
 
         status.textContent =
           "Time’s up!";
@@ -957,6 +951,7 @@
         "click",
         resetTimer
       );
+
 
       updateClock();
     })();
