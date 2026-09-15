@@ -1,7 +1,8 @@
 /* =========================================================
    LEC 100 — CLEAN PRESENTATION CSS
    Explicit presentation sizing
-   No competing shrink rules
+   Larger Slide 9 text
+   Large Slide 11 activity + timer
    ========================================================= */
 
 :root {
@@ -590,43 +591,54 @@ button:focus-visible {
 
 /* =========================================================
    SLIDE 9
-   ONLY SLIDE THAT IS DELIBERATELY SMALLER
+   LARGER TEXT WHILE PRESERVING FIT
    ========================================================= */
 
 #slide-9 .slide-inner {
-  padding-top: 10px;
-  padding-bottom: 5px;
+  width: 95vw;
+  max-width: 1450px;
+
+  padding-top: 8px;
+  padding-bottom: 4px;
 }
 
 #slide-9 h2 {
   margin-bottom: 7px;
-  font-size: 38px;
+
+  font-size: 46px;
 }
 
 #slide-9 .two-col {
-  gap: 16px;
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(360px, 0.7fr);
+
+  gap: 18px;
 }
 
 #slide-9 .lead {
   margin-top: 0;
   margin-bottom: 5px;
 
-  font-size: 18px;
+  font-size: 23px;
+  line-height: 1.2;
 }
 
 #slide-9 .two-col p {
   margin: 4px 0;
 
-  font-size: 15px;
+  font-size: 19px;
+  line-height: 1.25;
 }
 
 #slide-9 .callout {
-  padding: 9px 12px;
+  padding: 9px 13px;
 }
 
 #slide-9 .floor-label {
   margin-bottom: 2px;
-  font-size: 12px;
+
+  font-size: 14px;
 }
 
 #slide-9 .call-number {
@@ -634,17 +646,19 @@ button:focus-visible {
 
   color: var(--purple-900);
 
-  font-size: 30px;
-  line-height: 1.15;
+  font-size: 34px;
+  line-height: 1.1;
 
   letter-spacing: 0.04em;
 }
 
 #slide-9 .note {
   margin-top: 5px;
+
   padding: 5px 10px;
 
-  font-size: 13px;
+  font-size: 17px;
+  line-height: 1.2;
 }
 
 #slide-9 .lcc-resource {
@@ -654,7 +668,8 @@ button:focus-visible {
 #slide-9 .lcc-resource p {
   margin: 2px 0;
 
-  font-size: 12px;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 #slide-9 .language-note {
@@ -664,7 +679,7 @@ button:focus-visible {
 
   border-left: 5px solid var(--purple-700);
 
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.2;
 }
 
@@ -692,9 +707,6 @@ button:focus-visible {
   font-size: 60px;
 }
 
-
-/* Two strong columns */
-
 #slide-11 .activity-layout {
   display: grid;
 
@@ -707,8 +719,9 @@ button:focus-visible {
   align-items: center;
 }
 
-
-/* Activity instructions */
+#slide-11 .activity-instructions {
+  min-width: 0;
+}
 
 #slide-11 .activity-list {
   margin: 0;
@@ -721,9 +734,6 @@ button:focus-visible {
   font-size: 26px;
   line-height: 1.25;
 }
-
-
-/* Activity callout */
 
 #slide-11 .callout.compact {
   margin-top: 14px;
@@ -741,7 +751,6 @@ button:focus-visible {
 
 /* =========================================================
    SLIDE 11 TIMER
-   LARGE VISUAL TIMER
    ========================================================= */
 
 #slide-11 .activity-timer {
@@ -767,9 +776,6 @@ button:focus-visible {
   text-transform: uppercase;
 }
 
-
-/* This is the actual visible clock size */
-
 #slide-11 .visual-clock {
   position: relative;
 
@@ -779,18 +785,12 @@ button:focus-visible {
   margin: 0 auto 8px;
 }
 
-
-/* SVG fills the full 300px clock */
-
 #slide-11 .timer-svg {
   display: block;
 
   width: 300px;
   height: 300px;
 }
-
-
-/* Timer text sits over SVG */
 
 #slide-11 .timer-text {
   position: absolute;
@@ -805,9 +805,6 @@ button:focus-visible {
 
   pointer-events: none;
 }
-
-
-/* 15:00 */
 
 #slide-11 .timer-display {
   margin: 0;
@@ -827,9 +824,6 @@ button:focus-visible {
     0 2px 7px rgba(47, 23, 71, 0.75);
 }
 
-
-/* "remaining" */
-
 #slide-11 .timer-center-label {
   margin: 7px 0 0;
 
@@ -844,9 +838,6 @@ button:focus-visible {
   text-shadow:
     0 1px 5px rgba(47, 23, 71, 0.75);
 }
-
-
-/* Timer controls */
 
 #slide-11 .timer-controls {
   display: flex;
@@ -891,9 +882,6 @@ button:focus-visible {
   font-weight: 700;
 }
 
-
-/* Timer warning / finished states */
-
 .activity-timer.timer-warning {
   border-color: #8a3b00;
 }
@@ -907,9 +895,6 @@ button:focus-visible {
   color: #8b0000;
   text-shadow: none;
 }
-
-
-/* Slide 11 navigation */
 
 #slide-11 .slide-nav {
   margin-top: 7px;
@@ -941,10 +926,7 @@ button:focus-visible {
 
 
 /* =========================================================
-   ONLY ONE EMERGENCY HEIGHT RULE
-
-   This activates only on unusually short browser windows.
-   It does NOT affect normal laptop/projector screens.
+   EMERGENCY RULE FOR VERY SHORT WINDOWS ONLY
    ========================================================= */
 
 @media (max-height: 620px) {
@@ -969,7 +951,35 @@ button:focus-visible {
   }
 
 
-  /* Slide 11 remains prominent even here */
+  /* Slide 9 */
+
+  #slide-9 h2 {
+    font-size: 38px;
+  }
+
+  #slide-9 .lead {
+    font-size: 19px;
+  }
+
+  #slide-9 .two-col p {
+    font-size: 16px;
+  }
+
+  #slide-9 .call-number {
+    font-size: 29px;
+  }
+
+  #slide-9 .note {
+    font-size: 14px;
+  }
+
+  #slide-9 .lcc-resource p,
+  #slide-9 .language-note {
+    font-size: 13px;
+  }
+
+
+  /* Slide 11 */
 
   #slide-11 h2 {
     font-size: 46px;
@@ -1005,31 +1015,6 @@ button:focus-visible {
 
   #slide-11 .timer-display {
     font-size: 42px;
-  }
-
-
-  /* Slide 9 */
-
-  #slide-9 h2 {
-    font-size: 32px;
-  }
-
-  #slide-9 .lead {
-    font-size: 15px;
-  }
-
-  #slide-9 .two-col p {
-    font-size: 12px;
-  }
-
-  #slide-9 .call-number {
-    font-size: 25px;
-  }
-
-  #slide-9 .note,
-  #slide-9 .lcc-resource p,
-  #slide-9 .language-note {
-    font-size: 10px;
   }
 }
 
