@@ -13,7 +13,7 @@
   <main class="deck" aria-label="LEC 100 library introduction presentation">
 
     <!-- SLIDE 1 -->
-    <section class="slide title-slide" id="slide-1" aria-labelledby="s1-title">
+    <section class="slide title-slide active" id="slide-1" aria-labelledby="s1-title">
       <div class="slide-inner">
         <p class="slide-number" aria-label="Slide 1 of 11">1 / 11</p>
         <p class="eyebrow">LEC 100 · First Year Seminar</p>
@@ -601,7 +601,6 @@
                 aria-hidden="true"
                 focusable="false"
               >
-                <!-- Pale lavender elapsed-time background -->
                 <circle
                   class="timer-background"
                   cx="50"
@@ -609,7 +608,6 @@
                   r="48"
                 ></circle>
 
-                <!-- Purple remaining-time sector -->
                 <path
                   class="timer-sector"
                   id="timer-sector"
@@ -640,7 +638,6 @@
 
             </div>
 
-
             <p
               class="sr-only"
               id="timer-accessible"
@@ -650,21 +647,11 @@
               15 minutes remaining
             </p>
 
-
             <div class="timer-controls">
-              <button type="button" id="timer-start">
-                Start
-              </button>
-
-              <button type="button" id="timer-pause">
-                Pause
-              </button>
-
-              <button type="button" id="timer-reset">
-                Reset
-              </button>
+              <button type="button" id="timer-start">Start</button>
+              <button type="button" id="timer-pause">Pause</button>
+              <button type="button" id="timer-reset">Reset</button>
             </div>
-
 
             <p
               class="timer-status"
@@ -676,7 +663,6 @@
           </aside>
 
         </div>
-
 
         <nav class="slide-nav" aria-label="Slide navigation">
           <a href="#slide-10">
@@ -693,9 +679,209 @@
   </main>
 
 
-  <!-- SVG 15-MINUTE COUNTDOWN -->
   <script>
     (() => {
+
+      /* =====================================================
+         SLIDE NAVIGATION
+         ===================================================== */
+
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      let currentSlideIndex = 0;
+
+
+      function getSlideIndexFromHash() {
+        const match = window.location.hash.match(/^#slide-(\d+)$/);
+
+        if (!match) {
+          return 0;
+        }
+
+        const requestedIndex = Number(match[1]) - 1;
+
+        if (
+          requestedIndex < 0 ||
+          requestedIndex >= slides.length
+        ) {
+          return 0;
+        }
+
+        return requestedIndex;
+      }
+
+
+      function showSlide(index, updateHash = true) {
+        const safeIndex = Math.max(
+          0,
+          Math.min(slides.length - 1, index)
+        );
+
+        currentSlideIndex = safeIndex;
+
+        slides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === safeIndex;
+
+          slide.classList.toggle("active", isActive);
+
+          slide.setAttribute(
+            "aria-hidden",
+            isActive ? "false" : "true"
+          );
+        });
+
+
+        if (updateHash) {
+          const newHash = `#slide-${safeIndex + 1}`;
+
+          if (window.location.hash !== newHash) {
+            history.pushState(
+              null,
+              "",
+              newHash
+            );
+          }
+        }
+      }
+
+
+      function nextSlide() {
+        if (currentSlideIndex < slides.length - 1) {
+          showSlide(currentSlideIndex + 1);
+        }
+      }
+
+
+      function previousSlide() {
+        if (currentSlideIndex > 0) {
+          showSlide(currentSlideIndex - 1);
+        }
+      }
+
+
+      /*
+        Previous / Next links already use hashes.
+        Intercept internal slide links so the deck switches
+        immediately without browser scrolling.
+      */
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href^="#slide-"]');
+
+        if (!link) {
+          return;
+        }
+
+        const match = link.getAttribute("href").match(/^#slide-(\d+)$/);
+
+        if (!match) {
+          return;
+        }
+
+        const index = Number(match[1]) - 1;
+
+        if (
+          index < 0 ||
+          index >= slides.length
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        showSlide(index);
+      });
+
+
+      /*
+        Keyboard presentation controls.
+
+        Right / Down / Space / PageDown = next
+        Left / Up / PageUp = previous
+        Home = first
+        End = last
+
+        If focus is inside a button, link, input, textarea,
+        or other editable control, Space is left alone so
+        normal control behavior still works.
+      */
+      document.addEventListener("keydown", (event) => {
+        const target = event.target;
+
+        const isInteractive =
+          target.matches(
+            "button, input, textarea, select, [contenteditable='true']"
+          );
+
+
+        if (
+          event.key === "ArrowRight" ||
+          event.key === "ArrowDown" ||
+          event.key === "PageDown"
+        ) {
+          event.preventDefault();
+          nextSlide();
+          return;
+        }
+
+
+        if (
+          event.key === "ArrowLeft" ||
+          event.key === "ArrowUp" ||
+          event.key === "PageUp"
+        ) {
+          event.preventDefault();
+          previousSlide();
+          return;
+        }
+
+
+        if (
+          event.key === " " &&
+          !isInteractive
+        ) {
+          event.preventDefault();
+          nextSlide();
+          return;
+        }
+
+
+        if (
+          event.key === "Home" &&
+          !isInteractive
+        ) {
+          event.preventDefault();
+          showSlide(0);
+          return;
+        }
+
+
+        if (
+          event.key === "End" &&
+          !isInteractive
+        ) {
+          event.preventDefault();
+          showSlide(slides.length - 1);
+        }
+      });
+
+
+      window.addEventListener("popstate", () => {
+        showSlide(
+          getSlideIndexFromHash(),
+          false
+        );
+      });
+
+
+      showSlide(
+        getSlideIndexFromHash(),
+        false
+      );
+
+
+      /* =====================================================
+         15-MINUTE SVG COUNTDOWN
+         ===================================================== */
+
       const TIMER_LENGTH = 15 * 60;
 
       let timeRemaining = TIMER_LENGTH;
@@ -731,11 +917,8 @@
 
 
       function formatTime(seconds) {
-        const minutes =
-          Math.floor(seconds / 60);
-
-        const secs =
-          seconds % 60;
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
 
         return (
           String(minutes).padStart(2, "0") +
@@ -745,18 +928,11 @@
       }
 
 
-      /*
-        Creates a FILLED SVG pie sector.
-
-        Purple sector = time remaining.
-        Lavender circle underneath = elapsed time.
-
-        This does not use CSS gradients.
-      */
       function createSectorPath(fraction) {
         const cx = 50;
         const cy = 50;
         const radius = 48;
+
 
         if (fraction >= 0.999999) {
           return `
@@ -776,9 +952,7 @@
         const angle =
           fraction * Math.PI * 2;
 
-        /*
-          Start at 12 o'clock and move clockwise.
-        */
+
         const endX =
           cx + radius * Math.sin(angle);
 
@@ -930,9 +1104,7 @@
 
         tick();
 
-
         clearInterval(timerInterval);
-
 
         timerInterval = null;
         endTime = null;
@@ -950,7 +1122,6 @@
 
       function finishTimer() {
         clearInterval(timerInterval);
-
 
         timerInterval = null;
         endTime = null;
@@ -994,10 +1165,8 @@
       function resetTimer() {
         clearInterval(timerInterval);
 
-
         timerInterval = null;
         endTime = null;
-
 
         timeRemaining =
           TIMER_LENGTH;
@@ -1041,6 +1210,7 @@
 
 
       updateClock();
+
     })();
   </script>
 
